@@ -1,0 +1,57 @@
+// =============================================================================
+// DAX Measures Library: Supply Chain & Logistics Analytics
+// =============================================================================
+
+// --- Financial Aggregations ---
+Total Gross Sales = SUM(fact_order_items[gross_sales])
+
+Total Net Sales = SUM(fact_order_items[net_sales])
+
+Total Profit = SUM(fact_order_items[profit])
+
+Profit Margin % = DIVIDE([Total Profit], [Total Net Sales], BLANK())
+
+Total Discount Amount = SUM(fact_order_items[order_item_discount])
+
+Average Discount Rate % = AVERAGE(fact_order_items[order_item_discount_rate])
+
+// --- Operational & Volume Metrics ---
+Total Orders = DISTINCTCOUNT(fact_order_items[order_id])
+
+Total Order Items = COUNTROWS(fact_order_items)
+
+Average Order Value = DIVIDE([Total Net Sales], [Total Orders], BLANK())
+
+Items Per Order = DIVIDE([Total Order Items], [Total Orders], BLANK())
+
+// --- Delivery & Fulfillment SLAs ---
+Total Eligible Shipments = CALCULATE(COUNTROWS(fact_order_items), fact_order_items[is_eligible_shipment] = 1)
+
+Late Delivery Items Count = CALCULATE(COUNTROWS(fact_order_items), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
+
+Late Delivery Rate % = DIVIDE([Late Delivery Items Count], [Total Eligible Shipments], BLANK())
+
+On-Time Delivery Rate % = 1 - [Late Delivery Rate %]
+
+Late Orders Count = CALCULATE(DISTINCTCOUNT(fact_order_items[order_id]), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
+
+Late Order Rate % = DIVIDE([Late Orders Count], [Total Orders], BLANK())
+
+Average Actual Shipping Days = AVERAGE(fact_order_items[shipping_days_real])
+
+Average Scheduled Shipping Days = AVERAGE(fact_order_items[shipping_days_scheduled])
+
+Average Delay Days (Late Only) = CALCULATE(AVERAGE(fact_order_items[delay_days]), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
+
+// --- Time Intelligence & MoM Trends ---
+Sales Previous Month = CALCULATE([Total Net Sales], PREVIOUSMONTH(dim_date[full_date]))
+
+MoM Net Sales Growth % = 
+VAR PrevSales = [Sales Previous Month]
+RETURN DIVIDE([Total Net Sales] - PrevSales, PrevSales, BLANK())
+
+Profit Previous Month = CALCULATE([Total Profit], PREVIOUSMONTH(dim_date[full_date]))
+
+MoM Profit Growth % = 
+VAR PrevProfit = [Profit Previous Month]
+RETURN DIVIDE([Total Profit] - PrevProfit, PrevProfit, BLANK())

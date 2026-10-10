@@ -1,0 +1,53 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Pytest / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Environments
+.env
+.venv
+
+# Large Raw Datasets (Do not commit large raw zips / access logs)
+data/raw/*.zip
+data/raw/tokenized_access_logs.csv
+data/raw/DataCoSupplyChainDataset.csv
+
+# Keep processed sample tables and documentation
+!data/README.md
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini

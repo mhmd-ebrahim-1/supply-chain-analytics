@@ -1,0 +1,13 @@
+shipping_mode,shipping_days_scheduled,delivery_status,shipping_profile_id
+Standard Class,4,Advance shipping,1
+Standard Class,4,Late delivery,2
+Standard Class,4,Shipping on time,3
+Standard Class,4,Shipping canceled,4
+First Class,1,Late delivery,5
+Second Class,2,Late delivery,6
+Second Class,2,Shipping canceled,7
+Same Day,0,Shipping on time,8
+Same Day,0,Late delivery,9
+Same Day,0,Shipping canceled,10
+Second Class,2,Shipping on time,11
+First Class,1,Shipping canceled,12

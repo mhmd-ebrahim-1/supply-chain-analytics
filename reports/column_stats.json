@@ -1,0 +1,479 @@
+[
+  {
+    "column": "Type",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 4,
+    "sample": "DEBIT",
+    "description": "Type of transaction made"
+  },
+  {
+    "column": "Days for shipping (real)",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 7,
+    "sample": "3",
+    "description": "Actual shipping days of the purchased product"
+  },
+  {
+    "column": "Days for shipment (scheduled)",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 4,
+    "sample": "4",
+    "description": "Days of scheduled delivery of the purchased product"
+  },
+  {
+    "column": "Benefit per order",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 21998,
+    "sample": "91.25",
+    "description": "Earnings per order placed"
+  },
+  {
+    "column": "Sales per customer",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 2927,
+    "sample": "314.6400146",
+    "description": "Total sales per customer made per customer"
+  },
+  {
+    "column": "Delivery Status",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 4,
+    "sample": "Advance shipping",
+    "description": "Delivery status of orders: Advance shipping , Late delivery , Shipping canceled , Shipping on time"
+  },
+  {
+    "column": "Late_delivery_risk",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 2,
+    "sample": "0",
+    "description": "Categorical variable that indicates if sending is late (1), it is not late (0)."
+  },
+  {
+    "column": "Category Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 51,
+    "sample": "73",
+    "description": "Product category code"
+  },
+  {
+    "column": "Category Name",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 50,
+    "sample": "Sporting Goods",
+    "description": "Description of the product category"
+  },
+  {
+    "column": "Customer City",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 563,
+    "sample": "Caguas",
+    "description": "City where the customer made the purchase"
+  },
+  {
+    "column": "Customer Country",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 2,
+    "sample": "Puerto Rico",
+    "description": "Country where the customer made the purchase"
+  },
+  {
+    "column": "Customer Email",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 1,
+    "sample": "XXXXXXXXX",
+    "description": "Customer's email"
+  },
+  {
+    "column": "Customer Fname",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 782,
+    "sample": "Cally",
+    "description": "Customer name"
+  },
+  {
+    "column": "Customer Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 20652,
+    "sample": "20755",
+    "description": "Customer ID"
+  },
+  {
+    "column": "Customer Lname",
+    "dtype": "object",
+    "null_count": 8,
+    "null_pct": 0.0,
+    "unique_count": 1109,
+    "sample": "Holloway",
+    "description": "Customer lastname"
+  },
+  {
+    "column": "Customer Password",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 1,
+    "sample": "XXXXXXXXX",
+    "description": "Masked customer key"
+  },
+  {
+    "column": "Customer Segment",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 3,
+    "sample": "Consumer",
+    "description": "Types of Customers: Consumer , Corporate , Home Office"
+  },
+  {
+    "column": "Customer State",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 46,
+    "sample": "PR",
+    "description": "State to which the store where the purchase is registered belongs"
+  },
+  {
+    "column": "Customer Street",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 7458,
+    "sample": "5365 Noble Nectar Island",
+    "description": "Street to which the store where the purchase is registered belongs"
+  },
+  {
+    "column": "Customer Zipcode",
+    "dtype": "float64",
+    "null_count": 3,
+    "null_pct": 0.0,
+    "unique_count": 995,
+    "sample": "725.0",
+    "description": "Customer Zipcode"
+  },
+  {
+    "column": "Department Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 11,
+    "sample": "2",
+    "description": "Department code of store"
+  },
+  {
+    "column": "Department Name",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 11,
+    "sample": "Fitness",
+    "description": "Department name of store"
+  },
+  {
+    "column": "Latitude",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 11250,
+    "sample": "18.2514534",
+    "description": "Latitude corresponding to location of store"
+  },
+  {
+    "column": "Longitude",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 4487,
+    "sample": "-66.03705597",
+    "description": "Longitude corresponding to location of store"
+  },
+  {
+    "column": "Market",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 5,
+    "sample": "Pacific Asia",
+    "description": "Market to where the order is delivered : Africa , Europe , LATAM , Pacific Asia , USCA"
+  },
+  {
+    "column": "Order City",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 3597,
+    "sample": "Bekasi",
+    "description": "Destination city of the order"
+  },
+  {
+    "column": "Order Country",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 164,
+    "sample": "Indonesia",
+    "description": "Destination country of the order"
+  },
+  {
+    "column": "Order Customer Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 20652,
+    "sample": "20755",
+    "description": "Customer order code"
+  },
+  {
+    "column": "order date (DateOrders)",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 65752,
+    "sample": "1/31/2018 22:56",
+    "description": "Date on which the order is made"
+  },
+  {
+    "column": "Order Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 65752,
+    "sample": "77202",
+    "description": "Order code"
+  },
+  {
+    "column": "Order Item Cardprod Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 118,
+    "sample": "1360",
+    "description": "Product code generated through the RFID reader"
+  },
+  {
+    "column": "Order Item Discount",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 1017,
+    "sample": "13.10999966",
+    "description": "Order item discount value"
+  },
+  {
+    "column": "Order Item Discount Rate",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 18,
+    "sample": "0.039999999",
+    "description": "Order item discount percentage"
+  },
+  {
+    "column": "Order Item Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 180519,
+    "sample": "180517",
+    "description": "Order item code"
+  },
+  {
+    "column": "Order Item Product Price",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 75,
+    "sample": "327.75",
+    "description": "Price of products without discount"
+  },
+  {
+    "column": "Order Item Profit Ratio",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 162,
+    "sample": "0.289999992",
+    "description": "Order Item Profit Ratio"
+  },
+  {
+    "column": "Order Item Quantity",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 5,
+    "sample": "1",
+    "description": "Number of products per order"
+  },
+  {
+    "column": "Sales",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 193,
+    "sample": "327.75",
+    "description": "Value in sales"
+  },
+  {
+    "column": "Order Item Total",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 2927,
+    "sample": "314.6400146",
+    "description": "Total amount per order"
+  },
+  {
+    "column": "Order Profit Per Order",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 21998,
+    "sample": "91.25",
+    "description": "Order Profit Per Order"
+  },
+  {
+    "column": "Order Region",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 23,
+    "sample": "Southeast Asia",
+    "description": "Region of the world where the order is delivered :  Southeast Asia ,South Asia ,Oceania ,Eastern Asia, West Asia , West of USA , US Center , West Africa, Central Africa ,North Africa ,Western Europe ,Northern , Caribbean , South America ,East Africa ,Southern Europe , East of USA ,Canada ,Southern Africa , Central Asia ,  Europe , Central America, Eastern Europe , South of  USA"
+  },
+  {
+    "column": "Order State",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 1089,
+    "sample": "Java Occidental",
+    "description": "State of the region where the order is delivered"
+  },
+  {
+    "column": "Order Status",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 9,
+    "sample": "COMPLETE",
+    "description": "Order Status : COMPLETE , PENDING , CLOSED , PENDING_PAYMENT ,CANCELED , PROCESSING ,SUSPECTED_FRAUD ,ON_HOLD ,PAYMENT_REVIEW"
+  },
+  {
+    "column": "Order Zipcode",
+    "dtype": "float64",
+    "null_count": 155679,
+    "null_pct": 86.24,
+    "unique_count": 609,
+    "sample": "99301.0",
+    "description": ""
+  },
+  {
+    "column": "Product Card Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 118,
+    "sample": "1360",
+    "description": "Product code"
+  },
+  {
+    "column": "Product Category Id",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 51,
+    "sample": "73",
+    "description": "Product category code"
+  },
+  {
+    "column": "Product Description",
+    "dtype": "float64",
+    "null_count": 180519,
+    "null_pct": 100.0,
+    "unique_count": 0,
+    "sample": "None",
+    "description": "Product Description"
+  },
+  {
+    "column": "Product Image",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 118,
+    "sample": "http://images.acmesports.sports/Smart+wa",
+    "description": "Link of visit and purchase of the product"
+  },
+  {
+    "column": "Product Name",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 118,
+    "sample": "Smart watch ",
+    "description": "Product Name"
+  },
+  {
+    "column": "Product Price",
+    "dtype": "float64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 75,
+    "sample": "327.75",
+    "description": "Product Price"
+  },
+  {
+    "column": "Product Status",
+    "dtype": "int64",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 1,
+    "sample": "0",
+    "description": "Status of the product stock :If it is 1 not available , 0 the product is available"
+  },
+  {
+    "column": "shipping date (DateOrders)",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 63701,
+    "sample": "2/3/2018 22:56",
+    "description": ""
+  },
+  {
+    "column": "Shipping Mode",
+    "dtype": "object",
+    "null_count": 0,
+    "null_pct": 0.0,
+    "unique_count": 4,
+    "sample": "Standard Class",
+    "description": "The following shipping modes are presented : Standard Class , First Class , Second Class , Same Day"
+  }
+]
