@@ -252,4 +252,4 @@ All 14 tests will pass in under 12 seconds.
 
 ## 11. Author & Contact
 - **Analyst:** Mohamed Ebrahim
-- **Specialization:** Senior Data Analyst | BI Developer | Supply Chain & Financial Analytics
+- **Specialization:**  Data Analyst | BI Developer 
