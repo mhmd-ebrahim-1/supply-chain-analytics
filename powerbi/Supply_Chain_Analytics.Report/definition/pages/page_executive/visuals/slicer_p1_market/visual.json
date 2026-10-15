@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "slicer_p1_market",
   "position": {
-    "x": 20,
-    "y": 15,
-    "z": 0,
-    "height": 55,
-    "width": 390,
-    "tabOrder": 0
+    "x": 800,
+    "y": 24,
+    "z": 2,
+    "height": 45,
+    "width": 150,
+    "tabOrder": 2
   },
   "visual": {
     "visualType": "slicer",
@@ -42,7 +42,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Filter Market'"
+                  "Value": "'Market'"
                 }
               }
             }

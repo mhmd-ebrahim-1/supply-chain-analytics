@@ -259,10 +259,11 @@ All 14 tests will pass in under 12 seconds.
 Double-click:
 `powerbi/Supply_Chain_Analytics.pbip`
 
-This launches Power BI Desktop connected to the TMDL semantic model and renders the 3 high-density, beautifully structured executive pages with custom corporate theme (`SupplyChainModernExecutive`):
-1. **Executive Overview (مركز القيادة التنفيذي):** Global interactive slicers ribbon, 5 core financial & operational KPI cards (Revenue, Operating Profit, Margin %, Total Orders, SLA Late Rate), monthly revenue/margin trajectory combo chart, category revenue breakdown, global market sales comparison, and fulfillment delivery health distribution.
-2. **Logistics & Delivery Performance (لوجستيات الشحن واختناقات التسليم):** 5 transit & SLA benchmark cards, carrier late rate breakdown across shipping modes, overdue transit days distribution histogram, regional SLA compliance matrix, and shipping mode volume share.
-3. **Profitability & Operations Deep Dive (الربحية التجارية والتدقيق التشغيلي):** Multi-attribute filter header (Market, Shipping Mode, Status, Discount Tier), commercial cards (Gross Sales, Discounts, Avg Discount %, Realized Margin %), margin erosion analysis across discount brackets, ABC revenue Pareto stratification, and a full operational transaction audit log.
+This launches Power BI Desktop connected to the TMDL semantic model and renders the 4-page Modern Executive UI/UX Dashboard (`1280x720`, `#F1F5F9` canvas, Deep Slate Navy sidebar `#0F172A`, white cards `#FFFFFF` with soft borders `#E2E8F0`):
+1. **Page 1: Executive Overview (الملخص التنفيذي):** Left navigation sidebar, top slicers (Fiscal Year, Market, Segment, Order Status), 4 core KPI cards (Total Sales, Total Profit, Total Orders, AOV), Monthly Sales & Profit combo chart, Sales by Customer Segment donut chart, Sales by Market bar chart, and Orders by Payment Method bar chart.
+2. **Page 2: Shipping & Logistics - OTIF (أداء الشحن والعمليات اللوجستية):** Left navigation sidebar, top slicers (Shipping Mode, Market), 4 delivery benchmark cards (On-Time Delivery % OTIF, Late Delivery Risk %, Avg Real Shipping Days, Avg Shipping Delay Days), Late Delivery Rate % by shipping mode bar chart, Delivery Status Breakdown donut chart, Late Delivery Rate Trend Over Time line chart, and Regional Logistics SLA Compliance matrix.
+3. **Page 3: Product & Category Performance (تحليل المنتجات والأقسام):** Left navigation sidebar, top slicers (Department, Discount Tier), 4 product metric cards (Total Products Sold, Total Units Sold, Total Discount Given, Avg Product Price), Top Categories by Sales bar chart, Sales Share by Department treemap, Profit Margin % by Discount Bracket bar chart, and Product Financial Scorecard audit table.
+4. **Page 4: Customer & Geo Intelligence (التحليل الجغرافي والعملاء):** Left navigation sidebar, top slicers (Market, Customer Segment), 4 customer KPI cards (Active Customers, Sales per Customer, Countries Reached, Suspected Fraud Orders), Geographic Sales Distribution by Region column chart, Revenue by Customer Segment bar chart, Top Customers by Revenue & Profit audit table, and Order Lifecycle & Fraud Risk Analysis bar chart.
 
 ---
 

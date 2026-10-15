@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "card_p3_avg_price",
+  "position": {
+    "x": 1014,
+    "y": 88,
+    "z": 6,
+    "height": 105,
+    "width": 250,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Product Price"
+                }
+              },
+              "queryRef": "_Measures.Avg Product Price",
+              "nativeQueryRef": "Avg Product Price"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Avg Product Catalog Price'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

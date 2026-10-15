@@ -141,6 +141,108 @@ table _Measures
 		displayFolder: 4. Time Intelligence
 		lineageTag: d1f96bfb-5508-428d-918c-add10d66058f
 
+	measure 'Total Sales' =
+			SUM ( fact_order_items[net_sales] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: a1111111-0001-4000-8000-000000000001
+
+	measure 'Total Quantity' =
+			SUM ( fact_order_items[order_item_quantity] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0002-4000-8000-000000000002
+
+	measure 'AOV' =
+			DIVIDE ( [Total Net Sales], [Total Orders], BLANK() )
+		formatString: $#,##0.00
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0003-4000-8000-000000000003
+
+	measure 'Avg Discount %' =
+			AVERAGE ( fact_order_items[order_item_discount_rate] )
+		formatString: 0.00%
+		displayFolder: 1. Financial KPIs
+		lineageTag: a1111111-0004-4000-8000-000000000004
+
+	measure 'On-Time Delivery %' =
+			1 - [Late Delivery Rate %]
+		formatString: 0.00%
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0005-4000-8000-000000000005
+
+	measure 'Late Delivery Risk %' =
+			[Late Delivery Rate %]
+		formatString: 0.00%
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0006-4000-8000-000000000006
+
+	measure 'Avg Real Shipping Days' =
+			AVERAGE ( fact_order_items[shipping_days_real] )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0007-4000-8000-000000000007
+
+	measure 'Avg Scheduled Days' =
+			AVERAGE ( fact_order_items[shipping_days_scheduled] )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0008-4000-8000-000000000008
+
+	measure 'Avg Shipping Delay (Days)' =
+			CALCULATE ( AVERAGE ( fact_order_items[delay_days] ), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1 )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0009-4000-8000-000000000009
+
+	measure 'Total Products Sold' =
+			DISTINCTCOUNT ( fact_order_items[product_id] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0010-4000-8000-000000000010
+
+	measure 'Total Units Sold' =
+			SUM ( fact_order_items[order_item_quantity] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0011-4000-8000-000000000011
+
+	measure 'Total Discount Given' =
+			SUM ( fact_order_items[order_item_discount] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: a1111111-0012-4000-8000-000000000012
+
+	measure 'Avg Product Price' =
+			AVERAGE ( dim_product[product_price] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: a1111111-0013-4000-8000-000000000013
+
+	measure 'Active Customers' =
+			DISTINCTCOUNT ( fact_order_items[customer_id] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0014-4000-8000-000000000014
+
+	measure 'Sales per Customer' =
+			DIVIDE ( [Total Net Sales], [Active Customers], BLANK() )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: a1111111-0015-4000-8000-000000000015
+
+	measure 'Countries Reached' =
+			DISTINCTCOUNT ( dim_geography[order_country] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: a1111111-0016-4000-8000-000000000016
+
+	measure 'Suspected Fraud Orders' =
+			CALCULATE ( DISTINCTCOUNT ( fact_order_items[order_id] ), dim_order[order_status] = "SUSPECTED_FRAUD" )
+		formatString: #,##0
+		displayFolder: 3. Delivery KPIs
+		lineageTag: a1111111-0017-4000-8000-000000000017
+
 	column MeasuresTablePlaceholder
 		dataType: int64
 		isHidden

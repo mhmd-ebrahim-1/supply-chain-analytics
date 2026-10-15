@@ -2,8 +2,9 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
   "pageOrder": [
     "page_executive",
-    "page_logistics",
-    "page_operations"
+    "page_shipping",
+    "page_product",
+    "page_customer"
   ],
   "activePageName": "page_executive"
 }

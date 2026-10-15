@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "slicer_p1_status",
+  "position": {
+    "x": 1120,
+    "y": 24,
+    "z": 4,
+    "height": 45,
+    "width": 140,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_order"
+                    }
+                  },
+                  "Property": "order_status"
+                }
+              },
+              "queryRef": "dim_order.order_status",
+              "nativeQueryRef": "order_status",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Order Status'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

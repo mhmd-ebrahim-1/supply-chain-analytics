@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "card_p2_late",
+  "position": {
+    "x": 482,
+    "y": 88,
+    "z": 4,
+    "height": 105,
+    "width": 250,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Late Delivery Risk %"
+                }
+              },
+              "queryRef": "_Measures.Late Delivery Risk %",
+              "nativeQueryRef": "Late Delivery Risk %"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Late Delivery Risk %'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

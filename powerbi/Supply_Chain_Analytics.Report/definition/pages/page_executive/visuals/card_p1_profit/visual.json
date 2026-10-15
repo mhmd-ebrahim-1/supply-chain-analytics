@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "card_p1_profit",
   "position": {
-    "x": 270,
-    "y": 80,
-    "z": 4,
-    "height": 95,
-    "width": 240,
-    "tabOrder": 4
+    "x": 482,
+    "y": 88,
+    "z": 6,
+    "height": 105,
+    "width": 250,
+    "tabOrder": 6
   },
   "visual": {
     "visualType": "card",
@@ -41,7 +41,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Operating Profit'"
+                  "Value": "'Total Profit'"
                 }
               }
             }

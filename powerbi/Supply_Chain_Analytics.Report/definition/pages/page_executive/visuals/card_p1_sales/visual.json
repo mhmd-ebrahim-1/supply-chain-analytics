@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "card_p1_sales",
   "position": {
-    "x": 20,
-    "y": 80,
-    "z": 3,
-    "height": 95,
-    "width": 240,
-    "tabOrder": 3
+    "x": 216,
+    "y": 88,
+    "z": 5,
+    "height": 105,
+    "width": 250,
+    "tabOrder": 5
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Net Sales"
+                  "Property": "Total Sales"
                 }
               },
-              "queryRef": "_Measures.Total Net Sales",
-              "nativeQueryRef": "Total Net Sales"
+              "queryRef": "_Measures.Total Sales",
+              "nativeQueryRef": "Total Sales"
             }
           ]
         }
@@ -41,7 +41,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Net Revenue'"
+                  "Value": "'Total Sales'"
                 }
               }
             }

@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "combo_p1_trajectory",
   "position": {
-    "x": 20,
-    "y": 185,
-    "z": 8,
-    "height": 250,
-    "width": 760,
-    "tabOrder": 8
+    "x": 216,
+    "y": 209,
+    "z": 9,
+    "height": 240,
+    "width": 680,
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "lineStackedColumnComboChart",
@@ -42,11 +42,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Net Sales"
+                  "Property": "Total Sales"
                 }
               },
-              "queryRef": "_Measures.Total Net Sales",
-              "nativeQueryRef": "Total Net Sales"
+              "queryRef": "_Measures.Total Sales",
+              "nativeQueryRef": "Total Sales"
             }
           ]
         },
@@ -78,7 +78,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Monthly Revenue & Profit Trajectory'"
+                  "Value": "'Monthly Sales & Profit Trend'"
                 }
               }
             }
