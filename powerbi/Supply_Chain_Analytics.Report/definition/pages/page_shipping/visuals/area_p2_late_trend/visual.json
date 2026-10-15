@@ -4,10 +4,10 @@
   "position": {
     "x": 216,
     "y": 461,
-    "z": 12,
+    "z": 15,
     "height": 243,
     "width": 516,
-    "tabOrder": 12
+    "tabOrder": 15
   },
   "visual": {
     "visualType": "areaChart",
@@ -23,11 +23,11 @@
                       "Entity": "dim_date"
                     }
                   },
-                  "Property": "full_date"
+                  "Property": "year_month"
                 }
               },
-              "queryRef": "dim_date.full_date",
-              "nativeQueryRef": "full_date",
+              "queryRef": "dim_date.year_month",
+              "nativeQueryRef": "year_month",
               "active": true
             }
           ]
@@ -164,6 +164,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

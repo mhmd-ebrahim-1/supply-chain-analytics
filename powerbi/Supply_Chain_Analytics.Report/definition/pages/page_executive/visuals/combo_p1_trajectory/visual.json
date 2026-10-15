@@ -4,10 +4,10 @@
   "position": {
     "x": 216,
     "y": 205,
-    "z": 10,
+    "z": 13,
     "height": 240,
     "width": 680,
-    "tabOrder": 10
+    "tabOrder": 13
   },
   "visual": {
     "visualType": "lineStackedColumnComboChart",
@@ -23,11 +23,11 @@
                       "Entity": "dim_date"
                     }
                   },
-                  "Property": "full_date"
+                  "Property": "year_month"
                 }
               },
-              "queryRef": "dim_date.full_date",
-              "nativeQueryRef": "full_date",
+              "queryRef": "dim_date.year_month",
+              "nativeQueryRef": "year_month",
               "active": true
             }
           ]
@@ -182,6 +182,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

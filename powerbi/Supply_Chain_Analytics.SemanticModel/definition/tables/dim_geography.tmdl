@@ -1,54 +1,54 @@
 table dim_geography
-	lineageTag: 31c873b4-c786-46be-978a-f64e87fd85ce
+	lineageTag: 464975a2-ffdb-40aa-8aa8-c24894a081ef
 
 	column geo_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 18a7801d-5971-4916-83f8-e740dfd44287
+		lineageTag: 3210a925-abf6-462d-bea1-ac42bfbbfac6
 		summarizeBy: none
 		sourceColumn: geo_id
 
 	column market
 		dataType: string
-		lineageTag: 8d249ab9-8bcc-4498-83e3-3d67c13f0e90
+		lineageTag: ae3afb87-4663-464a-8943-f127dcbd5428
 		summarizeBy: none
 		sourceColumn: market
 
 	column order_region
 		dataType: string
-		lineageTag: f7da3496-8323-4b07-b5e4-687ba20d437f
+		lineageTag: 94b901d1-0af2-4860-8dfd-e6fc83bebbc0
 		summarizeBy: none
 		sourceColumn: order_region
 
 	column order_country
 		dataType: string
-		lineageTag: 4fb8535f-f933-4613-8cc5-a8cb3b9999bb
+		lineageTag: 858e9b5c-73d8-43d5-8fce-198b1c4aa1cf
 		summarizeBy: none
 		sourceColumn: order_country
 
 	column order_state
 		dataType: string
-		lineageTag: 6e2ec8f4-72ad-4bb4-884e-891002b7c5fd
+		lineageTag: 52d01804-9dce-4f51-82c9-0628f9c76365
 		summarizeBy: none
 		sourceColumn: order_state
 
 	column order_city
 		dataType: string
-		lineageTag: 69fab776-4ddd-406d-aae0-e37957a70fbf
+		lineageTag: 7aa0c447-d3be-4eb6-a521-9f3e8cbc74e2
 		summarizeBy: none
 		sourceColumn: order_city
 
 	column latitude
 		dataType: double
 		formatString: 0.000000
-		lineageTag: ce0425ad-9883-4a14-b035-ec2b80678e84
+		lineageTag: 1e11fb39-3603-4135-9421-7e7f05e8af0f
 		summarizeBy: none
 		sourceColumn: latitude
 
 	column longitude
 		dataType: double
 		formatString: 0.000000
-		lineageTag: 9ef79a68-741e-4ce9-b4b0-dd4741e04c0c
+		lineageTag: 8f25214b-d4c8-41d0-b232-f97d4110e46a
 		summarizeBy: none
 		sourceColumn: longitude
 

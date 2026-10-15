@@ -1,143 +1,143 @@
 table fact_order_items
-	lineageTag: 7754e16c-d1b7-4004-8d6d-45ef28dbd43b
+	lineageTag: 7a165250-0e93-4e1e-9435-303fbd690cce
 
 	column order_item_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 38f06a3f-a2b5-49b9-8f2c-771bde79d417
+		lineageTag: d69108d5-409f-4dab-888d-f135896ca44a
 		summarizeBy: none
 		sourceColumn: order_item_id
 
 	column order_id
 		dataType: int64
 		formatString: 0
-		lineageTag: c49b2d07-9abf-49c2-8852-7a55f0d1a913
+		lineageTag: a1d224dd-6d8e-407d-b154-9f2b4c8712eb
 		summarizeBy: none
 		sourceColumn: order_id
 
 	column order_date_key
 		dataType: int64
 		formatString: 0
-		lineageTag: f1bb5a63-5bf6-4bf4-983c-48e7d5108708
+		lineageTag: 3bc41108-8e88-4cb7-8806-049356ab893d
 		summarizeBy: none
 		sourceColumn: order_date_key
 
 	column shipping_date_key
 		dataType: int64
 		formatString: 0
-		lineageTag: 76851525-372a-472a-b9b6-71beec781822
+		lineageTag: 9c5bc108-e1df-4438-9711-10e16c9158c0
 		summarizeBy: none
 		sourceColumn: shipping_date_key
 
 	column customer_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 14aac95e-193d-4fa7-8d15-9852633d3c78
+		lineageTag: 39a71fbf-ee6c-4e79-a38b-ffb17ee2621e
 		summarizeBy: none
 		sourceColumn: customer_id
 
 	column product_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 25fcd067-df86-41f9-b2f2-1ddf127c22ca
+		lineageTag: c3b5b0ee-6e96-44a8-ab13-18afb3f39097
 		summarizeBy: none
 		sourceColumn: product_id
 
 	column geo_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 67d2cc9b-fb1b-4b58-ac76-a811276ce662
+		lineageTag: 4700210e-e561-4f15-80e3-34e1bfd398fc
 		summarizeBy: none
 		sourceColumn: geo_id
 
 	column shipping_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 5fb5f0d3-0f6e-4868-86c1-4ba6c64c4081
+		lineageTag: 1f0ba7dc-21dd-4a85-a1b2-718b811d20d5
 		summarizeBy: none
 		sourceColumn: shipping_id
 
 	column order_item_quantity
 		dataType: int64
 		formatString: #,##0
-		lineageTag: 2c6392ae-7cb4-4534-bf00-bcfb2d752be9
+		lineageTag: f87254ad-231e-453a-b193-244eb7acedda
 		summarizeBy: sum
 		sourceColumn: order_item_quantity
 
 	column sales
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 17f02106-4211-4447-a643-dd6d69a438f7
+		lineageTag: 257c3d72-be4e-4f69-b4f4-7d7c96c6cf9a
 		summarizeBy: sum
 		sourceColumn: sales
 
 	column order_item_discount
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 7034c20d-df30-4b70-a646-69bcacc6607b
+		lineageTag: 299b5e1d-d27a-43f0-a4fc-e41ee7cf0370
 		summarizeBy: sum
 		sourceColumn: order_item_discount
 
 	column order_item_discount_rate
 		dataType: double
 		formatString: 0.00%
-		lineageTag: 7a3f2dc8-a827-4f37-bdd6-17a806182155
+		lineageTag: a52c599c-37b0-4e47-891b-22e3b614ae81
 		summarizeBy: average
 		sourceColumn: order_item_discount_rate
 
 	column order_item_product_price
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 2947262c-43e7-4ed6-8e49-82923a482a8a
+		lineageTag: 3f06bde9-6186-4a4c-ae4e-2498c322e9bc
 		summarizeBy: average
 		sourceColumn: order_item_product_price
 
 	column order_item_profit_ratio
 		dataType: double
 		formatString: 0.00%
-		lineageTag: 0002b30e-cd4a-489f-8976-35c2c108fb4d
+		lineageTag: c9a83bb6-8fb4-4dab-931d-22be21b52659
 		summarizeBy: average
 		sourceColumn: order_item_profit_ratio
 
 	column order_profit_per_order
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 9a711d1f-6ff3-40f3-acee-2d11def19386
+		lineageTag: ad22c1fc-e342-4f19-8537-1538a86b71a3
 		summarizeBy: sum
 		sourceColumn: order_profit_per_order
 
 	column benefit_per_order
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 54391835-39b3-444c-b9fa-c04498dc1129
+		lineageTag: cc0cd669-e530-483b-84ac-84e3dbcf5a06
 		summarizeBy: sum
 		sourceColumn: benefit_per_order
 
 	column sales_per_customer
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: d34020f9-3a19-463e-858e-a971045bb5e5
+		lineageTag: 53771202-cb4c-48ce-83cc-00575ec8aa20
 		summarizeBy: sum
 		sourceColumn: sales_per_customer
 
 	column days_for_shipping_real
 		dataType: int64
 		formatString: 0
-		lineageTag: 441be5ba-377d-41e5-b566-b33ed9aadd0e
+		lineageTag: 67ad778a-cd6d-49aa-aa95-98b908409657
 		summarizeBy: average
 		sourceColumn: days_for_shipping_real
 
 	column days_for_shipment_scheduled
 		dataType: int64
 		formatString: 0
-		lineageTag: 4aaec055-07e5-4654-a49d-7fbe9e0f1893
+		lineageTag: 230bfde7-e8f2-44fb-aa8a-3f7de4567e04
 		summarizeBy: average
 		sourceColumn: days_for_shipment_scheduled
 
 	column late_delivery_risk
 		dataType: int64
 		formatString: 0
-		lineageTag: ca3e9d9f-f8ab-4c19-bb03-bf1e83770b23
+		lineageTag: ef948d80-03da-4068-8514-bfdec6655813
 		summarizeBy: sum
 		sourceColumn: late_delivery_risk
 

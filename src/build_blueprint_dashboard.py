@@ -2,12 +2,12 @@
 build_blueprint_dashboard.py
 ============================
 Builds the complete, production-ready 4-page Power BI Dashboard for Supply Chain Analytics.
-Applies:
-- Exact schema mappings: fact_order_items, dim_date, dim_customer, dim_geography, dim_order, dim_product, dim_shipping
-- Exact coordinates (1280x720 canvas, sidebar, header, 4 dropdown slicers, 4 KPI cards, middle & bottom visuals)
-- Executive UI/UX Design System: #F1F5F9 canvas, #FFFFFF card backgrounds with 8px radius, #E2E8F0 borders, drop shadows
-- Dropdown slicers (Style = Dropdown)
-- Data Labels ON, Axis Titles OFF on charts
+Fixes:
+- Sidebar: Adds sidebar background (#0F172A), sidebar logo/title, pageNavigator buttons, and model badge.
+- Page Headers: Injects rich-text paragraphs AND container titles (show: true, 16pt bold #0F172A) on all 4 pages.
+- Slicers: Dropdown mode, container title ON, raw column header OFF to prevent cutoff labels.
+- Monthly Trend Combo Chart: Category bound to dim_date[year_month] (Categorical, 37 monthly points) so columns and line render with zero warnings!
+- Market Chart: Displays both Total Sales and Total Profit as clustered bars.
 """
 
 import os
@@ -18,6 +18,25 @@ import sys
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 REPORT_PATH = os.path.join(BASE_DIR, "powerbi", "Supply_Chain_Analytics.Report")
 PAGES_DIR = os.path.join(REPORT_PATH, "definition", "pages")
+
+PAGE_METADATA = {
+    "page_executive": {
+        "title": "Executive Overview",
+        "subtitle": "Macro Fulfillment, Revenue & Profit Diagnostics"
+    },
+    "page_shipping": {
+        "title": "Shipping & Logistics",
+        "subtitle": "OTIF SLA Compliance & Transit Overrun Analysis"
+    },
+    "page_product": {
+        "title": "Product & Category Performance",
+        "subtitle": "Catalog Profitability, ABC Volume & Discount Impact"
+    },
+    "page_customer": {
+        "title": "Customer & Geo Intelligence",
+        "subtitle": "Geographic Market Penetration & Customer Risk Analysis"
+    }
+}
 
 def run_pbi(args, allow_fail=False):
     cmd = ["pbi"] + args
@@ -51,13 +70,20 @@ def build_pages():
         run_pbi(["report", "--no-sync", "-p", REPORT_PATH, "add-page", "--name", name, "--display-name", title, "--width", "1280", "--height", "720"])
         run_pbi(["report", "--no-sync", "-p", REPORT_PATH, "set-background", name, "--color", "#F1F5F9"])
 
-        # Add Sidebar visual
-        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "textbox", "--name", "sidebar_nav", "--x", "0", "--y", "0", "--width", "200", "--height", "720"])
-        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "sidebar_nav", "--page", name, "--title", "SUPPLY CHAIN BI"])
+        # 1. Sidebar Background Visual (Full Left Panel: 200x720 #0F172A)
+        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "textbox", "--name", "sidebar_bg", "--x", "0", "--y", "0", "--width", "200", "--height", "720"])
 
-        # Add Header Textbox
+        # 2. Sidebar Logo / Title Textbox
+        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "textbox", "--name", "sidebar_logo", "--x", "14", "--y", "20", "--width", "172", "--height", "75"])
+
+        # 3. Sidebar Page Navigator (4 Interactive Buttons)
+        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "page_navigator", "--name", "sidebar_nav", "--x", "14", "--y", "105", "--width", "172", "--height", "220"])
+
+        # 4. Sidebar Model Architecture Badge
+        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "textbox", "--name", "sidebar_kpi", "--x", "14", "--y", "560", "--width", "172", "--height", "135"])
+
+        # 5. Header Title Textbox
         run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", name, "--type", "textbox", "--name", "header_title", "--x", "216", "--y", "16", "--width", "360", "--height", "52"])
-        run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "header_title", "--page", name, "--title", title])
 
     print("\n=== Step 2: Building Page 1: Executive Overview ===")
     p = "page_executive"
@@ -83,16 +109,18 @@ def build_pages():
         run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", name, "--page", p, "--field", field])
         run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", name, "--page", p, "--title", title])
 
+    # Monthly Trend bound to year_month (37 continuous categorical bars)
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "combo", "--name", "combo_p1_trajectory", "--x", "216", "--y", "205", "--width", "680", "--height", "240"])
-    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "combo_p1_trajectory", "--page", p, "--category", "dim_date[full_date]", "--column", "_Measures[Total Sales]", "--line", "_Measures[Total Profit]"])
+    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "combo_p1_trajectory", "--page", p, "--category", "dim_date[year_month]", "--column", "_Measures[Total Sales]", "--line", "_Measures[Total Profit]"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "combo_p1_trajectory", "--page", p, "--title", "Monthly Sales & Profit Trend"])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "donut", "--name", "donut_p1_segment", "--x", "912", "--y", "205", "--width", "352", "--height", "240"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "donut_p1_segment", "--page", p, "--category", "dim_customer[customer_segment]", "--value", "_Measures[Total Sales]"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "donut_p1_segment", "--page", p, "--title", "Sales Share by Customer Segment"])
 
+    # Net Sales & Profit by Market (Clustered Bar with 2 measures)
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "bar", "--name", "bar_p1_market", "--x", "216", "--y", "461", "--width", "516", "--height", "243"])
-    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "bar_p1_market", "--page", p, "--category", "dim_geography[market]", "--value", "_Measures[Total Sales]"])
+    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "bar_p1_market", "--page", p, "--category", "dim_geography[market]", "--value", "_Measures[Total Sales]", "--value", "_Measures[Total Profit]"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "bar_p1_market", "--page", p, "--title", "Net Sales & Profit by Market"])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "bar", "--name", "bar_p1_payment", "--x", "748", "--y", "461", "--width", "516", "--height", "243"])
@@ -124,7 +152,7 @@ def build_pages():
         run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", name, "--page", p, "--title", title])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "column", "--name", "col_p2_mode_days", "--x", "216", "--y", "205", "--width", "516", "--height", "240"])
-    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "col_p2_mode_days", "--page", p, "--category", "dim_shipping[shipping_mode]", "--value", "_Measures[Avg Real Shipping Days]"])
+    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "col_p2_mode_days", "--page", p, "--category", "dim_shipping[shipping_mode]", "--value", "_Measures[Avg Scheduled Shipping Days]", "--value", "_Measures[Avg Real Shipping Days]"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "col_p2_mode_days", "--page", p, "--title", "Scheduled vs. Real Shipping Days by Mode"])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "bar", "--name", "bar_p2_status_mode", "--x", "748", "--y", "205", "--width", "516", "--height", "240"])
@@ -132,7 +160,7 @@ def build_pages():
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "bar_p2_status_mode", "--page", p, "--title", "Orders by Delivery Status & Shipping Mode"])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "area", "--name", "area_p2_late_trend", "--x", "216", "--y", "461", "--width", "516", "--height", "243"])
-    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "area_p2_late_trend", "--page", p, "--category", "dim_date[full_date]", "--value", "_Measures[Late Delivery Rate %]"])
+    run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "bind", "area_p2_late_trend", "--page", p, "--category", "dim_date[year_month]", "--value", "_Measures[Late Delivery Rate %]"])
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "set-container", "area_p2_late_trend", "--page", p, "--title", "Late Delivery Risk % Trend Over Time"])
 
     run_pbi(["visual", "--no-sync", "-p", REPORT_PATH, "add", "--page", p, "--type", "matrix", "--name", "matrix_p2_regional", "--x", "748", "--y", "461", "--width", "516", "--height", "243"])
@@ -221,19 +249,30 @@ def build_pages():
 
 def post_process_visual_styling():
     print("\n=== Step 6: Post-Processing PBIR Visual Styling ===")
-    for root, dirs, files in os.walk(PAGES_DIR):
-        if "visual.json" in files:
-            vpath = os.path.join(root, "visual.json")
+    for p_name in os.listdir(PAGES_DIR):
+        p_path = os.path.join(PAGES_DIR, p_name)
+        v_dir = os.path.join(p_path, "visuals")
+        if not os.path.isdir(v_dir):
+            continue
+
+        meta = PAGE_METADATA.get(p_name, {"title": "Analytics", "subtitle": "Operations Dashboard"})
+
+        for v_name in os.listdir(v_dir):
+            vpath = os.path.join(v_dir, v_name, "visual.json")
+            if not os.path.exists(vpath):
+                continue
+
             with open(vpath, "r", encoding="utf-8") as f:
                 v = json.load(f)
 
             vis = v.get("visual", {})
             vtype = vis.get("visualType", "")
             name = v.get("name", "")
-
             vco = vis.setdefault("visualContainerObjects", {})
+            objs = vis.setdefault("objects", {})
 
-            if name == "sidebar_nav":
+            # 1. Sidebar Background Panel
+            if name == "sidebar_bg":
                 vco["background"] = [{
                     "properties": {
                         "show": {"expr": {"Literal": {"Value": "true"}}},
@@ -241,12 +280,137 @@ def post_process_visual_styling():
                         "transparency": {"expr": {"Literal": {"Value": "0D"}}}
                     }
                 }]
-            elif name == "header_title":
+                vco.pop("title", None)
+
+            # 2. Sidebar Logo Textbox
+            elif name == "sidebar_logo":
+                vco["background"] = [{"properties": {"show": {"expr": {"Literal": {"Value": "false"}}}}}]
+                vco.pop("title", None)
+                objs["general"] = [{
+                    "properties": {
+                        "paragraphs": [{
+                            "textRuns": [
+                                {
+                                    "value": "SUPPLY CHAIN BI\n",
+                                    "textStyle": {"fontSize": "13pt", "fontFamily": "Segoe UI", "color": "#FFFFFF"}
+                                },
+                                {
+                                    "value": "Enterprise Analytics",
+                                    "textStyle": {"fontSize": "9pt", "fontFamily": "Segoe UI", "color": "#94A3B8"}
+                                }
+                            ]
+                        }]
+                    }
+                }]
+
+            # 3. Sidebar Page Navigator
+            elif name == "sidebar_nav":
+                vco["background"] = [{"properties": {"show": {"expr": {"Literal": {"Value": "false"}}}}}]
+                vco.pop("title", None)
+
+            # 4. Sidebar KPI / Metadata Badge
+            elif name == "sidebar_kpi":
                 vco["background"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "color": {"solid": {"color": {"expr": {"Literal": {"Value": "'#1E293B'"}}}}},
+                        "transparency": {"expr": {"Literal": {"Value": "0D"}}}
+                    }
+                }]
+                vco["border"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "color": {"solid": {"color": {"expr": {"Literal": {"Value": "'#334155'"}}}}},
+                        "radius": {"expr": {"Literal": {"Value": "6D"}}}
+                    }
+                }]
+                vco.pop("title", None)
+                objs["general"] = [{
+                    "properties": {
+                        "paragraphs": [{
+                            "textRuns": [
+                                {
+                                    "value": "MODEL ARCHITECTURE\n",
+                                    "textStyle": {"fontSize": "9pt", "fontFamily": "Segoe UI", "color": "#38BDF8"}
+                                },
+                                {
+                                    "value": "• Star Schema (3NF)\n• 180,519 Fact Rows\n• 65,752 Orders\n• Real-Time DAX",
+                                    "textStyle": {"fontSize": "8.5pt", "fontFamily": "Segoe UI", "color": "#CBD5E1"}
+                                }
+                            ]
+                        }]
+                    }
+                }]
+
+            # 5. Header Title
+            elif name == "header_title":
+                vco["background"] = [{"properties": {"show": {"expr": {"Literal": {"Value": "false"}}}}}]
+                # Container title explicitly ON with bold dark font
+                vco["title"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "text": {"expr": {"Literal": {"Value": f"'{meta['title']}'"}}},
+                        "fontSize": {"expr": {"Literal": {"Value": "16D"}}},
+                        "fontColor": {"solid": {"color": {"expr": {"Literal": {"Value": "'#0F172A'"}}}}}
+                    }
+                }]
+                vco["subTitle"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "text": {"expr": {"Literal": {"Value": f"'{meta['subtitle']}'"}}},
+                        "fontSize": {"expr": {"Literal": {"Value": "9.5D"}}},
+                        "fontColor": {"solid": {"color": {"expr": {"Literal": {"Value": "'#64748B'"}}}}}
+                    }
+                }]
+                objs["general"] = [{
+                    "properties": {
+                        "paragraphs": [{
+                            "textRuns": [
+                                {
+                                    "value": f"{meta['title']}\n",
+                                    "textStyle": {"fontSize": "16pt", "fontFamily": "Segoe UI", "color": "#0F172A"}
+                                },
+                                {
+                                    "value": meta["subtitle"],
+                                    "textStyle": {"fontSize": "9.5pt", "fontFamily": "Segoe UI", "color": "#64748B"}
+                                }
+                            ]
+                        }]
+                    }
+                }]
+
+            # 6. Slicers: Dropdown mode, Container Title ON, Slicer Header OFF
+            elif vtype == "slicer":
+                vco["background"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "color": {"solid": {"color": {"expr": {"Literal": {"Value": "'#FFFFFF'"}}}}},
+                        "transparency": {"expr": {"Literal": {"Value": "0D"}}}
+                    }
+                }]
+                vco["border"] = [{
+                    "properties": {
+                        "show": {"expr": {"Literal": {"Value": "true"}}},
+                        "color": {"solid": {"color": {"expr": {"Literal": {"Value": "'#E2E8F0'"}}}}},
+                        "radius": {"expr": {"Literal": {"Value": "6D"}}}
+                    }
+                }]
+                vco["dropShadow"] = [{"properties": {"show": {"expr": {"Literal": {"Value": "true"}}}}}]
+
+                # Set Dropdown mode
+                objs["data"] = [{
+                    "properties": {
+                        "mode": {"expr": {"Literal": {"Value": "'Dropdown'"}}}
+                    }
+                }]
+                # Turn OFF raw slicer header so it doesn't duplicate container title or truncate field names
+                objs["header"] = [{
                     "properties": {
                         "show": {"expr": {"Literal": {"Value": "false"}}}
                     }
                 }]
+
+            # 7. Standard Cards, Charts, Tables, Matrix
             else:
                 vco["background"] = [{
                     "properties": {
@@ -262,46 +426,33 @@ def post_process_visual_styling():
                         "radius": {"expr": {"Literal": {"Value": "8D"}}}
                     }
                 }]
-                vco["dropShadow"] = [{
-                    "properties": {
-                        "show": {"expr": {"Literal": {"Value": "true"}}}
-                    }
-                }]
+                vco["dropShadow"] = [{"properties": {"show": {"expr": {"Literal": {"Value": "true"}}}}}]
 
-            # Slicer: Dropdown mode
-            if vtype == "slicer":
-                objs = vis.setdefault("objects", {})
-                objs["data"] = [{
-                    "properties": {
-                        "mode": {"expr": {"Literal": {"Value": "'Dropdown'"}}}
-                    }
-                }]
-
-            # Charts: Data Labels ON, Axis Titles OFF
-            chart_types = ["barChart", "columnChart", "lineStackedColumnComboChart", "areaChart", "lineChart", "scatterChart", "donutChart"]
-            if vtype in chart_types:
-                objs = vis.setdefault("objects", {})
-                if vtype != "donutChart":
-                    objs["dataLabels"] = [{
-                        "properties": {
-                            "show": {"expr": {"Literal": {"Value": "true"}}}
-                        }
-                    }]
-                    objs["categoryAxis"] = [{
-                        "properties": {
-                            "showAxisTitle": {"expr": {"Literal": {"Value": "false"}}}
-                        }
-                    }]
-                    objs["valueAxis"] = [{
-                        "properties": {
-                            "showAxisTitle": {"expr": {"Literal": {"Value": "false"}}}
-                        }
-                    }]
+                # Charts formatting: Data Labels ON, Axis Titles OFF, Categorical X-axis
+                chart_types = ["barChart", "columnChart", "lineStackedColumnComboChart", "areaChart", "lineChart", "scatterChart", "donutChart"]
+                if vtype in chart_types:
+                    if vtype != "donutChart":
+                        objs["dataLabels"] = [{
+                            "properties": {
+                                "show": {"expr": {"Literal": {"Value": "true"}}}
+                            }
+                        }]
+                        objs["categoryAxis"] = [{
+                            "properties": {
+                                "showAxisTitle": {"expr": {"Literal": {"Value": "false"}}},
+                                "axisType": {"expr": {"Literal": {"Value": "'Categorical'"}}}
+                            }
+                        }]
+                        objs["valueAxis"] = [{
+                            "properties": {
+                                "showAxisTitle": {"expr": {"Literal": {"Value": "false"}}}
+                            }
+                        }]
 
             with open(vpath, "w", encoding="utf-8") as f:
                 json.dump(v, f, indent=2)
 
-    print("All visuals styled successfully with Dropdown mode, white cards, drop shadow, and data labels.")
+    print("All visuals styled successfully.")
 
 def validate():
     print("\n=== Step 7: Validating Full PBIR Report ===")

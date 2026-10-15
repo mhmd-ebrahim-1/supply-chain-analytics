@@ -4,10 +4,10 @@
   "position": {
     "x": 216,
     "y": 205,
-    "z": 10,
+    "z": 13,
     "height": 240,
     "width": 600,
-    "tabOrder": 10
+    "tabOrder": 13
   },
   "visual": {
     "visualType": "barChart",
@@ -164,6 +164,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

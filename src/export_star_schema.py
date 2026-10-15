@@ -27,6 +27,7 @@ def export_all():
         'quarter': date_range.quarter,
         'month': date_range.month,
         'month_name': date_range.strftime('%B'),
+        'year_month': date_range.strftime('%Y-%m'),
         'week': date_range.isocalendar().week.astype(int),
         'day_of_week': date_range.dayofweek + 1,
         'day_name': date_range.strftime('%A'),

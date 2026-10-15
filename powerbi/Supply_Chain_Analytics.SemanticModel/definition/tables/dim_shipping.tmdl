@@ -1,22 +1,22 @@
 table dim_shipping
-	lineageTag: 7922b594-f55b-4b0c-8862-254fecd95f9d
+	lineageTag: 92f04933-1b4c-44e4-8bae-d203228d79e3
 
 	column shipping_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 541dcf7f-2547-4590-b8af-0aca1f0cd245
+		lineageTag: 5638bc85-68f5-4785-ae90-15775d7c3994
 		summarizeBy: none
 		sourceColumn: shipping_id
 
 	column shipping_mode
 		dataType: string
-		lineageTag: 37820c43-45fe-481b-bd9c-8e4452f7d0c0
+		lineageTag: d1c476e6-632a-41c1-bbb7-5b06196412aa
 		summarizeBy: none
 		sourceColumn: shipping_mode
 
 	column delivery_status
 		dataType: string
-		lineageTag: 0b510973-e013-43a0-898f-3030373dbb2a
+		lineageTag: b7abedf1-d20f-4e2b-868c-461a5117b999
 		summarizeBy: none
 		sourceColumn: delivery_status
 

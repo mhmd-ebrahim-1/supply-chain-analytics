@@ -2,61 +2,32 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "sidebar_nav",
   "position": {
-    "x": 0,
-    "y": 0,
-    "z": 0,
-    "height": 720,
-    "width": 200,
-    "tabOrder": 0
+    "x": 14,
+    "y": 105,
+    "z": 2,
+    "height": 220,
+    "width": 172,
+    "tabOrder": 2
   },
   "visual": {
-    "visualType": "textbox",
-    "drillFilterOtherVisuals": true,
+    "visualType": "pageNavigator",
     "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'SUPPLY CHAIN BI'"
-                }
-              }
-            }
-          }
-        }
-      ],
       "background": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "color": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "Literal": {
-                      "Value": "'#0F172A'"
-                    }
-                  }
-                }
-              }
-            },
-            "transparency": {
-              "expr": {
-                "Literal": {
-                  "Value": "0D"
+                  "Value": "false"
                 }
               }
             }
           }
         }
       ]
-    }
-  }
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {}
+  },
+  "howCreated": "InsertVisualButton"
 }

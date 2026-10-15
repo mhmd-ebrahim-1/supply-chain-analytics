@@ -1,83 +1,83 @@
 table _Measures
-	lineageTag: 01006c2a-fc83-4495-b1f8-cf5e282bc97d
+	lineageTag: e1a696d7-305d-4cf0-9c5d-1614e2bfc4bd
 
 	measure 'Total Sales' =
 			SUM ( fact_order_items[sales] )
 		formatString: $#,##0.00
 		displayFolder: 1. Financial KPIs
-		lineageTag: 56e7c14c-0c5a-4aad-a9da-740f3d0dddc2
+		lineageTag: a2fb5936-244d-49e8-826c-a22463145ecc
 
 	measure 'Total Profit' =
 			SUM ( fact_order_items[benefit_per_order] )
 		formatString: $#,##0.00
 		displayFolder: 1. Financial KPIs
-		lineageTag: 5c2f119e-4d8d-479c-9b25-25bfb3a40542
+		lineageTag: cf5d4e15-daa3-49d8-9a59-fca65cd813ad
 
 	measure 'Profit Margin %' =
 			DIVIDE ( [Total Profit], [Total Sales], 0 )
 		formatString: 0.0%
 		displayFolder: 1. Financial KPIs
-		lineageTag: a336f95c-06c3-4ce5-98e2-c0a11471f9dd
+		lineageTag: 52fdcc1b-e121-4a90-9571-ac914d81b929
 
 	measure 'Total Orders' =
 			DISTINCTCOUNT ( fact_order_items[order_id] )
 		formatString: #,##0
 		displayFolder: 2. Volume KPIs
-		lineageTag: 50fe7fb4-6a2e-4d89-af61-21101ec976be
+		lineageTag: 5a621da6-98be-4fcf-ade8-ae63bdca2d2b
 
 	measure 'Total Quantity' =
 			SUM ( fact_order_items[order_item_quantity] )
 		formatString: #,##0
 		displayFolder: 2. Volume KPIs
-		lineageTag: f769a02d-9324-4dc7-9c18-54be78fd659e
+		lineageTag: ae8e12e7-e05d-4b53-965e-0f291fa7d6c4
 
 	measure 'AOV' =
 			DIVIDE ( [Total Sales], [Total Orders], 0 )
 		formatString: $#,##0.00
 		displayFolder: 1. Financial KPIs
-		lineageTag: 4d35fb0b-3a87-4607-870d-97886d8d1c53
+		lineageTag: 72537943-52c1-495f-ad22-0dfba9f4c10f
 
 	measure 'Total Discount' =
 			SUM ( fact_order_items[order_item_discount] )
 		formatString: $#,##0.00
 		displayFolder: 1. Financial KPIs
-		lineageTag: 9480a0f7-dcf3-4312-a807-5c6a1b0fe699
+		lineageTag: 7f579021-8326-4373-85bf-5d7898e176cf
 
 	measure 'Avg Discount Rate %' =
 			AVERAGE ( fact_order_items[order_item_discount_rate] )
 		formatString: 0.0%
 		displayFolder: 1. Financial KPIs
-		lineageTag: fb4062b9-cd1f-4ae4-9f03-784241f5ecc8
+		lineageTag: 9819efa9-d283-45a2-a354-e12b8759d135
 
 	measure 'Avg Real Shipping Days' =
 			AVERAGE ( fact_order_items[days_for_shipping_real] )
 		formatString: 0.00
 		displayFolder: 3. Delivery KPIs
-		lineageTag: 0d1c7bb1-2ebb-4505-9fd5-5503bb789b78
+		lineageTag: b709124f-587c-48ed-aea4-7ced464719ea
 
 	measure 'Avg Scheduled Shipping Days' =
 			AVERAGE ( fact_order_items[days_for_shipment_scheduled] )
 		formatString: 0.00
 		displayFolder: 3. Delivery KPIs
-		lineageTag: a8c07c63-ce2d-4543-80c8-47b094774974
+		lineageTag: b97f87d7-11de-4dd0-b58f-79f034999179
 
 	measure 'Shipping Delay Variance' =
 			[Avg Real Shipping Days] - [Avg Scheduled Shipping Days]
 		formatString: +0.00;-0.00;0.00
 		displayFolder: 3. Delivery KPIs
-		lineageTag: 9ffd0893-9ff7-4e0d-9d23-249509bd97fe
+		lineageTag: 9100a41b-bc44-44ef-a178-7e2496566ee4
 
 	measure 'Late Delivery Orders' =
 			CALCULATE ( [Total Orders], fact_order_items[late_delivery_risk] = 1 )
 		formatString: #,##0
 		displayFolder: 3. Delivery KPIs
-		lineageTag: 8d0f0251-3546-4a4e-a0b5-b0e4ea66c5d0
+		lineageTag: 9aab9dfe-5db3-4aac-8f19-d502e85b27d0
 
 	measure 'Late Delivery Rate %' =
 			DIVIDE ( [Late Delivery Orders], [Total Orders], 0 )
 		formatString: 0.0%
 		displayFolder: 3. Delivery KPIs
-		lineageTag: e7cc8012-dfcf-4213-8b55-c976a9cfe2e1
+		lineageTag: 66b0b90c-ab95-4524-9c02-8918a48cf744
 
 	measure 'On-Time Delivery Rate %' =
 			DIVIDE (
@@ -87,42 +87,42 @@ table _Measures
 			)
 		formatString: 0.0%
 		displayFolder: 3. Delivery KPIs
-		lineageTag: e6d13d8c-5951-49ee-a305-77f88993cb67
+		lineageTag: f49de36f-125f-4f2d-ab29-1d319469fc70
 
 	measure 'Active Customers' =
 			DISTINCTCOUNT ( fact_order_items[customer_id] )
 		formatString: #,##0
 		displayFolder: 4. Customer KPIs
-		lineageTag: 54f5aad5-51ec-469c-99f7-015ec92ff606
+		lineageTag: 3a4998e5-26e6-429e-b936-1b02b3357082
 
 	measure 'Active Products' =
 			DISTINCTCOUNT ( fact_order_items[product_id] )
 		formatString: #,##0
 		displayFolder: 5. Product KPIs
-		lineageTag: 27c9638a-760e-4b9a-855a-3e39973dbc51
+		lineageTag: 1ad4223e-d917-44a9-9d1f-0b7f247e6e25
 
 	measure 'Suspected Fraud Orders' =
 			CALCULATE ( [Total Orders], dim_order[order_status] = "SUSPECTED_FRAUD" )
 		formatString: #,##0
 		displayFolder: 4. Customer KPIs
-		lineageTag: 172c52fc-79e7-4758-ba68-9176c7607f2c
+		lineageTag: e7f61b93-6de9-48f0-bfe6-3271eaba5461
 
 	measure 'Sales per Customer' =
 			DIVIDE ( [Total Sales], [Active Customers], 0 )
 		formatString: $#,##0.00
 		displayFolder: 4. Customer KPIs
-		lineageTag: 37b08917-f39f-499c-aa46-cd97328d43d3
+		lineageTag: 887b095e-2685-4393-bbe5-6930a2ce77d9
 
 	measure 'Countries Reached' =
 			DISTINCTCOUNT ( dim_geography[order_country] )
 		formatString: #,##0
 		displayFolder: 4. Customer KPIs
-		lineageTag: b82a38ac-2f9c-48dc-b740-68d472ea2151
+		lineageTag: b76ccc4c-ed42-45c8-85ca-da35533e457f
 
 	column Dummy
 		dataType: int64
 		isHidden
-		lineageTag: d12a6a6b-0032-4b5a-b21f-ccd1bbd762d0
+		lineageTag: c056368a-370e-4eba-9029-a6318991dd4b
 		summarizeBy: none
 		sourceColumn: Dummy
 

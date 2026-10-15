@@ -4,10 +4,10 @@
   "position": {
     "x": 216,
     "y": 461,
-    "z": 12,
+    "z": 15,
     "height": 243,
     "width": 516,
-    "tabOrder": 12
+    "tabOrder": 15
   },
   "visual": {
     "visualType": "barChart",
@@ -47,6 +47,20 @@
               },
               "queryRef": "_Measures.Total Sales",
               "nativeQueryRef": "Total Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Profit"
+                }
+              },
+              "queryRef": "_Measures.Total Profit",
+              "nativeQueryRef": "Total Profit"
             }
           ]
         }
@@ -164,6 +178,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

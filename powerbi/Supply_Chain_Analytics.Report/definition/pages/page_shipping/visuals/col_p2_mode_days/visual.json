@@ -4,10 +4,10 @@
   "position": {
     "x": 216,
     "y": 205,
-    "z": 10,
+    "z": 13,
     "height": 240,
     "width": 516,
-    "tabOrder": 10
+    "tabOrder": 13
   },
   "visual": {
     "visualType": "columnChart",
@@ -34,6 +34,20 @@
         },
         "Y": {
           "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Scheduled Shipping Days"
+                }
+              },
+              "queryRef": "_Measures.Avg Scheduled Shipping Days",
+              "nativeQueryRef": "Avg Scheduled Shipping Days"
+            },
             {
               "field": {
                 "Measure": {
@@ -164,6 +178,13 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "axisType": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Categorical'"
                 }
               }
             }

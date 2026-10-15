@@ -1,72 +1,78 @@
 table dim_date
-	lineageTag: 0bdd88e4-d233-4fa0-9f2e-2feb8c495d45
+	lineageTag: fc68701c-e928-413b-86d5-d6567ab102b8
 
 	column date_key
 		dataType: int64
 		formatString: 0
-		lineageTag: 76141952-9193-44fa-b591-4e71906492fc
+		lineageTag: 296819c5-566d-438a-a443-c93fd53a7f26
 		summarizeBy: none
 		sourceColumn: date_key
 
 	column full_date
 		dataType: dateTime
 		formatString: yyyy-mm-dd
-		lineageTag: 28b34151-a425-497e-b5fc-04a05497c557
+		lineageTag: 18214999-f2a6-49df-b207-10d5bec82143
 		summarizeBy: none
 		sourceColumn: full_date
 
 	column year
 		dataType: int64
 		formatString: 0
-		lineageTag: cb2015ea-ff89-45e5-ab62-d4cbce604773
+		lineageTag: 159ee686-94dd-4189-889f-b68f0c300ce8
 		summarizeBy: none
 		sourceColumn: year
 
 	column quarter
 		dataType: int64
 		formatString: 0
-		lineageTag: b761e1e7-3d56-4ef1-b090-479fb77a60f7
+		lineageTag: 16638e4d-26d2-43de-aba8-3da9540f87c9
 		summarizeBy: none
 		sourceColumn: quarter
 
 	column month
 		dataType: int64
 		formatString: 0
-		lineageTag: 67ffb15e-659a-45b2-9976-071640ff38d6
+		lineageTag: 9dadf73e-100e-408f-9610-e385453d80e2
 		summarizeBy: none
 		sourceColumn: month
 
 	column month_name
 		dataType: string
-		lineageTag: 972c94a1-ee5f-4576-8abb-db8f43e7f0f2
+		lineageTag: 908ef222-b089-4257-b803-b7cd2fd45094
 		summarizeBy: none
 		sourceColumn: month_name
 		sortByColumn: month
 
+	column year_month
+		dataType: string
+		lineageTag: 76dba925-e65c-4749-b549-774d394b63d5
+		summarizeBy: none
+		sourceColumn: year_month
+
 	column week
 		dataType: int64
 		formatString: 0
-		lineageTag: 221051c1-6b39-485f-ad3e-55fccdf9fc72
+		lineageTag: 60cc6b46-4014-4552-987d-bc893ca9c706
 		summarizeBy: none
 		sourceColumn: week
 
 	column day_of_week
 		dataType: int64
 		formatString: 0
-		lineageTag: d6f269f7-ccf8-4898-b22e-bc388e43eb86
+		lineageTag: 2ecad40d-686c-47ee-9396-65d2be3fcad0
 		summarizeBy: none
 		sourceColumn: day_of_week
 
 	column day_name
 		dataType: string
-		lineageTag: ad6a6024-7e2d-4558-8207-7b27851c39d7
+		lineageTag: eb15c97d-7564-4d11-8ab2-8da75c15559a
 		summarizeBy: none
 		sourceColumn: day_name
 
 	column is_weekend
 		dataType: int64
 		formatString: 0
-		lineageTag: 9be80b04-4c6b-444c-81e8-7c649cba45b0
+		lineageTag: 6710dd38-83e0-4d79-ab96-d5405ee969e9
 		summarizeBy: none
 		sourceColumn: is_weekend
 
@@ -74,9 +80,9 @@ table dim_date
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_date.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_date.csv"),[Delimiter=",", Columns=11, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date_key", Int64.Type}, {"full_date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"week", Int64.Type}, {"day_of_week", Int64.Type}, {"day_name", type text}, {"is_weekend", Int64.Type}})
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"date_key", Int64.Type}, {"full_date", type date}, {"year", Int64.Type}, {"quarter", Int64.Type}, {"month", Int64.Type}, {"month_name", type text}, {"year_month", type text}, {"week", Int64.Type}, {"day_of_week", Int64.Type}, {"day_name", type text}, {"is_weekend", Int64.Type}})
 				in
 				    #"Changed Type"
 

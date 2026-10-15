@@ -1,22 +1,22 @@
 table dim_order
-	lineageTag: 2334d14c-50a1-4767-b011-54b4f653eb5e
+	lineageTag: 3ea718c2-2e31-4c52-b764-6944aa296f7f
 
 	column order_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 0695dc21-9bab-4187-a3fd-ddd4da4a1657
+		lineageTag: a8f0f256-61b6-49f7-b80f-406f7441c8ed
 		summarizeBy: none
 		sourceColumn: order_id
 
 	column order_status
 		dataType: string
-		lineageTag: 8eb1c1d0-7dc3-4057-a032-59fb3996a7d5
+		lineageTag: 10ac8aec-f157-44cf-98de-44a8bbe94dea
 		summarizeBy: none
 		sourceColumn: order_status
 
 	column payment_type
 		dataType: string
-		lineageTag: c5827303-60c2-4d2b-beb8-adc4f4f987be
+		lineageTag: 7d87bc35-3069-407c-aefe-578a9d486aa5
 		summarizeBy: none
 		sourceColumn: payment_type
 
