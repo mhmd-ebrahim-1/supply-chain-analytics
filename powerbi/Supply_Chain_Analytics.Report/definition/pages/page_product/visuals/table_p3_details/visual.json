@@ -1,5 +1,5 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
   "name": "table_p3_details",
   "position": {
     "x": 748,
@@ -27,7 +27,8 @@
                 }
               },
               "queryRef": "_Measures.Total Quantity",
-              "nativeQueryRef": "Total Quantity"
+              "nativeQueryRef": "Total Quantity",
+              "active": false
             },
             {
               "field": {
@@ -41,7 +42,8 @@
                 }
               },
               "queryRef": "_Measures.Total Sales",
-              "nativeQueryRef": "Total Sales"
+              "nativeQueryRef": "Total Sales",
+              "active": false
             },
             {
               "field": {
@@ -55,7 +57,8 @@
                 }
               },
               "queryRef": "_Measures.Total Profit",
-              "nativeQueryRef": "Total Profit"
+              "nativeQueryRef": "Total Profit",
+              "active": false
             },
             {
               "field": {
@@ -69,7 +72,8 @@
                 }
               },
               "queryRef": "_Measures.Profit Margin %",
-              "nativeQueryRef": "Profit Margin %"
+              "nativeQueryRef": "Profit Margin %",
+              "active": false
             },
             {
               "field": {
@@ -105,7 +109,6 @@
         }
       }
     },
-    "drillFilterOtherVisuals": true,
     "visualContainerObjects": {
       "title": [
         {
@@ -196,6 +199,6 @@
         }
       ]
     },
-    "objects": {}
+    "drillFilterOtherVisuals": true
   }
 }

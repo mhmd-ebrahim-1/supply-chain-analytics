@@ -2,56 +2,49 @@
 // DAX Measures Library: Supply Chain & Logistics Analytics
 // =============================================================================
 
-// --- Financial Aggregations ---
-Total Gross Sales = SUM(fact_order_items[gross_sales])
+// --- Financial KPIs ---
+Total Sales = SUM(fact_order_items[sales])
 
-Total Net Sales = SUM(fact_order_items[net_sales])
+Total Profit = SUM(fact_order_items[benefit_per_order])
 
-Total Profit = SUM(fact_order_items[profit])
+Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
 
-Profit Margin % = DIVIDE([Total Profit], [Total Net Sales], BLANK())
+AOV = DIVIDE([Total Sales], [Total Orders], 0)
 
-Total Discount Amount = SUM(fact_order_items[order_item_discount])
+Total Discount = SUM(fact_order_items[order_item_discount])
 
-Average Discount Rate % = AVERAGE(fact_order_items[order_item_discount_rate])
+Avg Discount Rate % = AVERAGE(fact_order_items[order_item_discount_rate])
 
-// --- Operational & Volume Metrics ---
+// --- Volume KPIs ---
 Total Orders = DISTINCTCOUNT(fact_order_items[order_id])
 
-Total Order Items = COUNTROWS(fact_order_items)
+Total Quantity = SUM(fact_order_items[order_item_quantity])
 
-Average Order Value = DIVIDE([Total Net Sales], [Total Orders], BLANK())
+// --- Delivery & Fulfillment KPIs ---
+Avg Real Shipping Days = AVERAGE(fact_order_items[days_for_shipping_real])
 
-Items Per Order = DIVIDE([Total Order Items], [Total Orders], BLANK())
+Avg Scheduled Shipping Days = AVERAGE(fact_order_items[days_for_shipment_scheduled])
 
-// --- Delivery & Fulfillment SLAs ---
-Total Eligible Shipments = CALCULATE(COUNTROWS(fact_order_items), fact_order_items[is_eligible_shipment] = 1)
+Shipping Delay Variance = [Avg Real Shipping Days] - [Avg Scheduled Shipping Days]
 
-Late Delivery Items Count = CALCULATE(COUNTROWS(fact_order_items), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
+Late Delivery Orders = CALCULATE([Total Orders], fact_order_items[late_delivery_risk] = 1)
 
-Late Delivery Rate % = DIVIDE([Late Delivery Items Count], [Total Eligible Shipments], BLANK())
+Late Delivery Rate % = DIVIDE([Late Delivery Orders], [Total Orders], 0)
 
-On-Time Delivery Rate % = 1 - [Late Delivery Rate %]
+On-Time Delivery Rate % = 
+DIVIDE(
+    CALCULATE([Total Orders], dim_shipping[delivery_status] IN { "Shipping on time", "Advance shipping" }),
+    [Total Orders],
+    0
+)
 
-Late Orders Count = CALCULATE(DISTINCTCOUNT(fact_order_items[order_id]), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
+// --- Customer & Product Intelligence ---
+Active Customers = DISTINCTCOUNT(fact_order_items[customer_id])
 
-Late Order Rate % = DIVIDE([Late Orders Count], [Total Orders], BLANK())
+Active Products = DISTINCTCOUNT(fact_order_items[product_id])
 
-Average Actual Shipping Days = AVERAGE(fact_order_items[shipping_days_real])
+Suspected Fraud Orders = CALCULATE([Total Orders], dim_order[order_status] = "SUSPECTED_FRAUD")
 
-Average Scheduled Shipping Days = AVERAGE(fact_order_items[shipping_days_scheduled])
+Sales per Customer = DIVIDE([Total Sales], [Active Customers], 0)
 
-Average Delay Days (Late Only) = CALCULATE(AVERAGE(fact_order_items[delay_days]), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1)
-
-// --- Time Intelligence & MoM Trends ---
-Sales Previous Month = CALCULATE([Total Net Sales], PREVIOUSMONTH(dim_date[full_date]))
-
-MoM Net Sales Growth % = 
-VAR PrevSales = [Sales Previous Month]
-RETURN DIVIDE([Total Net Sales] - PrevSales, PrevSales, BLANK())
-
-Profit Previous Month = CALCULATE([Total Profit], PREVIOUSMONTH(dim_date[full_date]))
-
-MoM Profit Growth % = 
-VAR PrevProfit = [Profit Previous Month]
-RETURN DIVIDE([Total Profit] - PrevProfit, PrevProfit, BLANK())
+Countries Reached = DISTINCTCOUNT(dim_geography[order_country])

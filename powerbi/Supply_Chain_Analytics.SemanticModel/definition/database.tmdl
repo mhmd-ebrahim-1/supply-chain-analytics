@@ -1,2 +1,3 @@
-database Supply_Chain_Analytics
-	compatibilityLevel: 1600
+database
+	compatibilityLevel: 1606
+

@@ -31,3 +31,4 @@ table dim_order
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+

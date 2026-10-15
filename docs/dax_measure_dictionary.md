@@ -1,256 +1,161 @@
-# Enterprise DAX Measure Dictionary: Supply Chain Analytics
+# DAX Measure Dictionary: Supply Chain Analytics
 
-This document contains production-grade DAX measures designed for the Power BI Star Schema semantic model. All measures follow formatting best practices, safe division handling (`DIVIDE`), and explicit filter context management.
-
----
-
-## 1. Core Financial Measures
-
-### [Total Gross Sales]
-```dax
-Total Gross Sales = 
-SUM(fact_order_items[gross_sales])
-```
-- **Description:** Sum of gross line-item sales prior to promotional discounts.
-- **Format:** Currency (`$#,##0.00`)
-
-### [Total Net Sales]
-```dax
-Total Net Sales = 
-SUM(fact_order_items[net_sales])
-```
-- **Description:** Sum of realized net sales collected from customers.
-- **Format:** Currency (`$#,##0.00`)
-
-### [Total Profit]
-```dax
-Total Profit = 
-SUM(fact_order_items[profit])
-```
-- **Description:** Cumulative operating profit contribution across all fulfilled items.
-- **Format:** Currency (`$#,##0.00`)
-
-### [Profit Margin %]
-```dax
-Profit Margin % = 
-DIVIDE(
-    [Total Profit],
-    [Total Net Sales],
-    BLANK()
-)
-```
-- **Description:** Realized profit percentage. Safely returns BLANK if net sales are zero.
-- **Format:** Percentage (`0.00%`)
-
-### [Total Discount Amount]
-```dax
-Total Discount Amount = 
-SUM(fact_order_items[order_item_discount])
-```
-- **Description:** Total dollar value granted to customers in price reductions.
-- **Format:** Currency (`$#,##0.00`)
-
-### [Average Discount Rate %]
-```dax
-Average Discount Rate % = 
-AVERAGE(fact_order_items[order_item_discount_rate])
-```
-- **Description:** Unweighted mean discount percentage applied to transaction lines.
-- **Format:** Percentage (`0.00%`)
+Production DAX measures implemented in the Star Schema semantic model (`powerbi/Supply_Chain_Analytics.pbip`).
 
 ---
 
-## 2. Order Volume & Operational Metrics
+## 1. Financial KPIs
 
-### [Total Orders]
+### `[Total Sales]`
 ```dax
-Total Orders = 
-DISTINCTCOUNT(fact_order_items[order_id])
+Total Sales = SUM(fact_order_items[sales])
 ```
-- **Description:** Distinct count of customer order headers. Prevents double-counting from multi-line orders.
-- **Format:** Whole Number (`#,##0`)
-
-### [Total Order Items]
-```dax
-Total Order Items = 
-COUNTROWS(fact_order_items)
-```
-- **Description:** Count of individual line-item rows processed.
-- **Format:** Whole Number (`#,##0`)
-
-### [Average Order Value (AOV)]
-```dax
-Average Order Value = 
-DIVIDE(
-    [Total Net Sales],
-    [Total Orders],
-    BLANK()
-)
-```
-- **Description:** Mean net revenue generated per unique customer order.
+- **Description:** Sum of net sales revenue collected from customers across all fulfilled line items.
 - **Format:** Currency (`$#,##0.00`)
 
-### [Items Per Order]
+### `[Total Profit]`
 ```dax
-Items Per Order = 
-DIVIDE(
-    [Total Order Items],
-    [Total Orders],
-    BLANK()
-)
+Total Profit = SUM(fact_order_items[benefit_per_order])
 ```
-- **Description:** Basket depth / average number of lines contained in an order.
-- **Format:** Decimal Number (`0.00`)
+- **Description:** Cumulative operating profit contribution across all orders.
+- **Format:** Currency (`$#,##0.00`)
+
+### `[Profit Margin %]`
+```dax
+Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
+```
+- **Description:** Operating profit margin ratio. Safely handles zero sales.
+- **Format:** Percentage (`0.0%`)
+
+### `[AOV]`
+```dax
+AOV = DIVIDE([Total Sales], [Total Orders], 0)
+```
+- **Description:** Average Order Value (revenue per distinct checkout transaction).
+- **Format:** Currency (`$#,##0.00`)
+
+### `[Total Discount]`
+```dax
+Total Discount = SUM(fact_order_items[order_item_discount])
+```
+- **Description:** Total dollar amount granted in promotional discounts.
+- **Format:** Currency (`$#,##0.00`)
+
+### `[Avg Discount Rate %]`
+```dax
+Avg Discount Rate % = AVERAGE(fact_order_items[order_item_discount_rate])
+```
+- **Description:** Mean promotional discount percentage across line items.
+- **Format:** Percentage (`0.0%`)
 
 ---
 
-## 3. Shipping & Delivery Performance Measures
+## 2. Operational & Volume KPIs
 
-### [Total Eligible Shipments]
+### `[Total Orders]`
 ```dax
-Total Eligible Shipments = 
-CALCULATE(
-    COUNTROWS(fact_order_items),
-    fact_order_items[is_eligible_shipment] = 1
-)
+Total Orders = DISTINCTCOUNT(fact_order_items[order_id])
 ```
-- **Description:** Total delivered orders excluding transit cancellations (`delivery_status <> "Shipping canceled"`).
-- **Format:** Whole Number (`#,##0`)
+- **Description:** Unique order transactions placed by customers.
+- **Format:** Integer (`#,##0`)
 
-### [Late Delivery Items Count]
+### `[Total Quantity]`
 ```dax
-Late Delivery Items Count = 
-CALCULATE(
-    COUNTROWS(fact_order_items),
-    fact_order_items[is_late_delivery] = 1,
-    fact_order_items[is_eligible_shipment] = 1
-)
+Total Quantity = SUM(fact_order_items[order_item_quantity])
 ```
-- **Description:** Number of completed deliveries where transit days exceeded scheduled SLA.
-- **Format:** Whole Number (`#,##0`)
+- **Description:** Total item units sold across all orders.
+- **Format:** Integer (`#,##0`)
 
-### [Late Delivery Rate %]
+---
+
+## 3. Delivery & Fulfillment KPIs
+
+### `[Avg Real Shipping Days]`
 ```dax
-Late Delivery Rate % = 
-DIVIDE(
-    [Late Delivery Items Count],
-    [Total Eligible Shipments],
-    BLANK()
-)
+Avg Real Shipping Days = AVERAGE(fact_order_items[days_for_shipping_real])
 ```
-- **Description:** Percentage of fulfilled shipments that arrived after the promised delivery date.
-- **Format:** Percentage (`0.00%`)
+- **Description:** Actual average transit days from dispatch to delivery.
+- **Format:** Decimal (`0.00`)
 
-### [On-Time Delivery Rate %]
+### `[Avg Scheduled Shipping Days]`
+```dax
+Avg Scheduled Shipping Days = AVERAGE(fact_order_items[days_for_shipment_scheduled])
+```
+- **Description:** Promised delivery schedule according to shipping SLA.
+- **Format:** Decimal (`0.00`)
+
+### `[Shipping Delay Variance]`
+```dax
+Shipping Delay Variance = [Avg Real Shipping Days] - [Avg Scheduled Shipping Days]
+```
+- **Description:** Variance between actual transit time and promised delivery schedule (+ indicates delay).
+- **Format:** Decimal (`+0.00;-0.00;0.00`)
+
+### `[Late Delivery Orders]`
+```dax
+Late Delivery Orders = CALCULATE([Total Orders], fact_order_items[late_delivery_risk] = 1)
+```
+- **Description:** Number of unique orders experiencing delivery delay.
+- **Format:** Integer (`#,##0`)
+
+### `[Late Delivery Rate %]`
+```dax
+Late Delivery Rate % = DIVIDE([Late Delivery Orders], [Total Orders], 0)
+```
+- **Description:** Proportion of total orders that arrived past the scheduled SLA.
+- **Format:** Percentage (`0.0%`)
+
+### `[On-Time Delivery Rate %]`
 ```dax
 On-Time Delivery Rate % = 
-1 - [Late Delivery Rate %]
-```
-- **Description:** Proportion of eligible deliveries arriving on or ahead of scheduled date.
-- **Format:** Percentage (`0.00%`)
-
-### [Late Orders Count]
-```dax
-Late Orders Count = 
-CALCULATE(
-    DISTINCTCOUNT(fact_order_items[order_id]),
-    fact_order_items[is_late_delivery] = 1,
-    fact_order_items[is_eligible_shipment] = 1
-)
-```
-- **Description:** Distinct count of orders that had at least one delayed item shipment.
-- **Format:** Whole Number (`#,##0`)
-
-### [Late Order Rate %]
-```dax
-Late Order Rate % = 
 DIVIDE(
-    [Late Orders Count],
+    CALCULATE([Total Orders], dim_shipping[delivery_status] IN { "Shipping on time", "Advance shipping" }),
     [Total Orders],
-    BLANK()
+    0
 )
 ```
-- **Description:** Proportion of unique orders experiencing delivery delays.
-- **Format:** Percentage (`0.00%`)
-
-### [Average Actual Shipping Days]
-```dax
-Average Actual Shipping Days = 
-AVERAGE(fact_order_items[shipping_days_real])
-```
-- **Description:** Average recorded shipping duration from dispatch to delivery.
-- **Format:** Decimal Number (`0.00`)
-
-### [Average Scheduled Shipping Days]
-```dax
-Average Scheduled Shipping Days = 
-AVERAGE(fact_order_items[shipping_days_scheduled])
-```
-- **Description:** Average carrier SLA promise duration.
-- **Format:** Decimal Number (`0.00`)
-
-### [Average Delay Days (Late Only)]
-```dax
-Average Delay Days (Late Only) = 
-CALCULATE(
-    AVERAGE(fact_order_items[delay_days]),
-    fact_order_items[is_late_delivery] = 1,
-    fact_order_items[is_eligible_shipment] = 1
-)
-```
-- **Description:** Mean number of days overdue for delayed shipments.
-- **Format:** Decimal Number (`0.00`)
+- **Description:** Proportion of orders delivered strictly on or ahead of schedule.
+- **Format:** Percentage (`0.0%`)
 
 ---
 
-## 4. Time Intelligence & Trend Growth Measures
+## 4. Customer & Geography Intelligence
 
-### [Sales Previous Month]
+### `[Active Customers]`
 ```dax
-Sales Previous Month = 
-CALCULATE(
-    [Total Net Sales],
-    PREVIOUSMONTH(dim_date[full_date])
-)
+Active Customers = DISTINCTCOUNT(fact_order_items[customer_id])
 ```
-- **Description:** Net sales in the immediately preceding calendar month.
+- **Description:** Unique customers with placed orders.
+- **Format:** Integer (`#,##0`)
+
+### `[Sales per Customer]`
+```dax
+Sales per Customer = DIVIDE([Total Sales], [Active Customers], 0)
+```
+- **Description:** Average revenue contribution per customer account.
 - **Format:** Currency (`$#,##0.00`)
 
-### [MoM Net Sales Growth %]
+### `[Countries Reached]`
 ```dax
-MoM Net Sales Growth % = 
-VAR PrevSales = [Sales Previous Month]
-RETURN
-DIVIDE(
-    [Total Net Sales] - PrevSales,
-    PrevSales,
-    BLANK()
-)
+Countries Reached = DISTINCTCOUNT(dim_geography[order_country])
 ```
-- **Description:** Month-over-month sales growth rate.
-- **Format:** Percentage (`0.00%`)
+- **Description:** Number of unique destination countries fulfilled.
+- **Format:** Integer (`#,##0`)
 
-### [Profit Previous Month]
+### `[Suspected Fraud Orders]`
 ```dax
-Profit Previous Month = 
-CALCULATE(
-    [Total Profit],
-    PREVIOUSMONTH(dim_date[full_date])
-)
+Suspected Fraud Orders = CALCULATE([Total Orders], dim_order[order_status] = "SUSPECTED_FRAUD")
 ```
-- **Description:** Realized profit in the preceding month.
-- **Format:** Currency (`$#,##0.00`)
+- **Description:** Orders flagged under suspected fraud security review.
+- **Format:** Integer (`#,##0`)
 
-### [MoM Profit Growth %]
+---
+
+## 5. Product Performance
+
+### `[Active Products]`
 ```dax
-MoM Profit Growth % = 
-VAR PrevProfit = [Profit Previous Month]
-RETURN
-DIVIDE(
-    [Total Profit] - PrevProfit,
-    PrevProfit,
-    BLANK()
-)
+Active Products = DISTINCTCOUNT(fact_order_items[product_id])
 ```
-- **Description:** Month-over-month profit growth rate.
-- **Format:** Percentage (`0.00%`)
+- **Description:** Number of unique catalog products with transaction history.
+- **Format:** Integer (`#,##0`)

@@ -67,3 +67,4 @@ table dim_customer
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+

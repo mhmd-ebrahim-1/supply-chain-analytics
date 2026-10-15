@@ -92,7 +92,7 @@
                     }
                   },
                   {
-                    "value": "\u2022 Star Schema (3NF)\n\u2022 180,519 Fact Rows\n\u2022 65,752 Orders\n\u2022 Real-Time DAX",
+                    "value": "• Star Schema (3NF)\n• 180,519 Fact Rows\n• 65,752 Orders\n• Real-Time DAX",
                     "textStyle": {
                       "fontSize": "8.5pt",
                       "fontFamily": "Segoe UI",

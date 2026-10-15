@@ -63,3 +63,4 @@ table dim_geography
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+

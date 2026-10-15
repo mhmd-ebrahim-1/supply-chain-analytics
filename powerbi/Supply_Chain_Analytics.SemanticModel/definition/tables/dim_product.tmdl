@@ -58,3 +58,4 @@ table dim_product
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+

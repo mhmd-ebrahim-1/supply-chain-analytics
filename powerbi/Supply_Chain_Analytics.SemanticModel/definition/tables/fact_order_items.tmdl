@@ -152,3 +152,4 @@ table fact_order_items
 				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+

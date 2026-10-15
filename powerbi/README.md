@@ -1,55 +1,34 @@
-# Power BI Implementation & Reproduction Guide
+# Power BI Project Guide
 
-This directory contains everything required to deploy and interact with the **Enterprise Supply Chain Analytics Dashboard** in Microsoft Power BI Desktop.
-
----
-
-## 1. Files in this Directory
-
-| File Name | Purpose |
-|---|---|
-| `powerquery_m_code.m` | Automated Power Query M ingestion queries for loading all star schema tables with pre-configured types. |
-| `dax_measures.dax` | Ready-to-paste DAX measure definitions formatted with comments and safe division handling. |
-| `report_pages_specification.md` | Detailed UX visual design specifications for all 5 dashboard report pages. |
-| `screenshots/` | High-resolution captures and visual representations of the analytical dashboard pages. |
+This directory contains the Power BI Project (`.pbip`), TMDL semantic model, PBIR report definition, and DAX library.
 
 ---
 
-## 2. Step-by-Step Power BI Setup Instructions
+## Quick Start
 
-### Step 1: Open Power BI Desktop
-1. Launch Power BI Desktop.
-2. In the Home ribbon, click **Get Data** $\rightarrow$ **Text/CSV**.
+1. Open Power BI Desktop (September 2024 or newer with PBIP / PBIR support enabled).
+2. Open `Supply_Chain_Analytics.pbip`.
+3. The report will load with all 4 pages, relationships, and DAX measures automatically.
 
-### Step 2: Load the Star Schema Tables
-Load the following pre-processed CSV tables from `data/processed/`:
-1. `fact_order_items.csv`
-2. `dim_date.csv`
-3. `dim_product.csv`
-4. `dim_customer.csv`
-5. `dim_geography.csv`
-6. `dim_order.csv`
+---
 
-*(Alternatively, open the Advanced Editor in Power Query and paste the queries from `powerquery_m_code.m`).*
+## Directory Contents
 
-### Step 3: Establish Star Schema Model Relationships
-Navigate to the **Model View** and verify the following 1-to-Many relationships:
-- `dim_date[date_key]` (1) $\rightarrow$ `fact_order_items[order_date_key]` (*) [Active]
-- `dim_date[date_key]` (1) $\rightarrow$ `fact_order_items[shipping_date_key]` (*) [Inactive]
-- `dim_product[product_id]` (1) $\rightarrow$ `fact_order_items[product_id]` (*) [Active]
-- `dim_customer[customer_id]` (1) $\rightarrow$ `fact_order_items[customer_id]` (*) [Active]
-- `dim_geography[geography_id]` (1) $\rightarrow$ `fact_order_items[geography_id]` (*) [Active]
-- `dim_order[order_id]` (1) $\rightarrow$ `fact_order_items[order_id]` (*) [Active]
+| Component | Path | Description |
+|---|---|---|
+| **PBIP Project** | `Supply_Chain_Analytics.pbip` | Main project entry point for Power BI Desktop. |
+| **PBIR Report** | `Supply_Chain_Analytics.Report/` | Git-friendly JSON report definitions (pages, visuals, bookmarks). |
+| **TMDL Semantic Model** | `Supply_Chain_Analytics.SemanticModel/` | Git-friendly TMDL model definitions (tables, measures, relationships). |
+| **Theme** | `SupplyChainTheme.json` | Report theme specification (colors, fonts, borders). |
+| **DAX Measures** | `dax_measures.dax` | Standalone reference library of all production measures. |
+| **Report Specs** | `report_pages_specification.md` | Layout, visual types, and field bindings for all 4 pages. |
 
-*Ensure Cross filter direction is set to **Single**.*
+---
 
-### Step 4: Add DAX Measures
-1. Create a dedicated measure table: Home ribbon $\rightarrow$ **Enter Data** $\rightarrow$ Name table `_Measures`.
-2. Right-click `_Measures` $\rightarrow$ **New Measure**, and copy each measure formula from `dax_measures.dax`.
+## Model Benchmark Totals
 
-### Step 5: Verify Model Totals
-Drag a Card visual onto Page 1 to verify benchmark totals match:
-- `[Total Net Sales]` = **\$33,054,402.04**
-- `[Total Profit]` = **\$3,966,907.39**
-- `[Total Orders]` = **65,752**
-- `[Late Delivery Rate %]` = **57.29%**
+Verify key metrics in Desktop:
+- **Total Sales:** \$33,054,402.04
+- **Total Profit:** \$3,966,907.39
+- **Total Orders:** 65,752
+- **Late Delivery Rate:** 54.8% (network) / 57.3% (eligible)
