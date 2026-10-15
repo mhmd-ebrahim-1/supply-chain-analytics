@@ -5,11 +5,6 @@
       "name": "CY24SU06",
       "reportVersionAtImport": "5.55",
       "type": "SharedResources"
-    },
-    "customTheme": {
-      "name": "SupplyChainModernExecutive",
-      "reportVersionAtImport": "5.55",
-      "type": "RegisteredResources"
     }
   },
   "layoutOptimization": "None",
@@ -26,18 +21,5 @@
     "isFilterSelectionsButtonEnabled": false,
     "isFieldWellButtonEnabled": false,
     "isApplyAllButtonEnabled": false
-  },
-  "resourcePackages": [
-    {
-      "name": "RegisteredResources",
-      "type": "RegisteredResources",
-      "items": [
-        {
-          "name": "corporate-theme.json",
-          "type": 202,
-          "path": "BaseThemes/corporate-theme.json"
-        }
-      ]
-    }
-  ]
+  }
 }
