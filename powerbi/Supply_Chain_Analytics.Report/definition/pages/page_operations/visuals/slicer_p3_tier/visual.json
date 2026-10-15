@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "slicer_p3_tier",
+  "position": {
+    "x": 950,
+    "y": 15,
+    "z": 3,
+    "height": 55,
+    "width": 310,
+    "tabOrder": 3
+  },
+  "visual": {
+    "visualType": "slicer",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_order_items"
+                    }
+                  },
+                  "Property": "discount_tier"
+                }
+              },
+              "queryRef": "fact_order_items.discount_tier",
+              "nativeQueryRef": "discount_tier",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Filter Discount Tier'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "col_p2_delays",
+  "position": {
+    "x": 650,
+    "y": 135,
+    "z": 6,
+    "height": 270,
+    "width": 610,
+    "tabOrder": 6
+  },
+  "visual": {
+    "visualType": "columnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_order_items"
+                    }
+                  },
+                  "Property": "delay_days"
+                }
+              },
+              "queryRef": "fact_order_items.delay_days",
+              "nativeQueryRef": "delay_days",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Late Deliveries Count"
+                }
+              },
+              "queryRef": "_Measures.Late Deliveries Count",
+              "nativeQueryRef": "Late Deliveries Count"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Overdue Transit Distribution (Delay Days)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -259,12 +259,10 @@ All 14 tests will pass in under 12 seconds.
 Double-click:
 `powerbi/Supply_Chain_Analytics.pbip`
 
-This launches Power BI Desktop connected to the TMDL semantic model and renders the 5 interactive pages:
-1. **Executive Overview:** High-level KPIs, monthly revenue/margin trajectory, category revenue breakdown, market revenue, and delivery health.
-2. **Shipping & Delivery Performance:** SLA compliance, shipping mode latency breakdown, overdue transit histogram, and regional matrix.
-3. **Product & Profitability Analysis:** Revenue vs profit margins, discount bracket erosion analysis, catalog product detail table.
-4. **Inventory & Replenishment Architecture:** Demand item volume, replenishment order counts, ABC revenue stratification breakdown.
-5. **Operational Deep Dive:** Multi-attribute interactive slicers (Market, Shipping Mode, Delivery Status, Segment) and comprehensive transaction audit grid.
+This launches Power BI Desktop connected to the TMDL semantic model and renders the 3 high-density, beautifully structured executive pages with custom corporate theme (`SupplyChainModernExecutive`):
+1. **Executive Overview (مركز القيادة التنفيذي):** Global interactive slicers ribbon, 5 core financial & operational KPI cards (Revenue, Operating Profit, Margin %, Total Orders, SLA Late Rate), monthly revenue/margin trajectory combo chart, category revenue breakdown, global market sales comparison, and fulfillment delivery health distribution.
+2. **Logistics & Delivery Performance (لوجستيات الشحن واختناقات التسليم):** 5 transit & SLA benchmark cards, carrier late rate breakdown across shipping modes, overdue transit days distribution histogram, regional SLA compliance matrix, and shipping mode volume share.
+3. **Profitability & Operations Deep Dive (الربحية التجارية والتدقيق التشغيلي):** Multi-attribute filter header (Market, Shipping Mode, Status, Discount Tier), commercial cards (Gross Sales, Discounts, Avg Discount %, Realized Margin %), margin erosion analysis across discount brackets, ABC revenue Pareto stratification, and a full operational transaction audit log.
 
 ---
 
