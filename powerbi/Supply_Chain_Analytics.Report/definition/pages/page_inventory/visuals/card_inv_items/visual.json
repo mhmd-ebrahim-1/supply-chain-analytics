@@ -1,0 +1,53 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "card_inv_items",
+  "position": {
+    "x": 20,
+    "y": 30,
+    "z": 0,
+    "height": 110,
+    "width": 390,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "card",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Order Items"
+                }
+              },
+              "queryRef": "_Measures.Total Order Items",
+              "nativeQueryRef": "Total Order Items"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Total Demand Items'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,179 @@
+table fact_order_items
+	lineageTag: f3d984c7-d9f2-4d17-bd15-4bf1754be702
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 92bdff8a-f393-450c-ac8c-2eb2841efbb8
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 42bf6f10-38fc-4dac-b1d9-777c1216bb28
+		summarizeBy: none
+		sourceColumn: order_id
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: b239aaca-e355-45c9-b230-ac8473b00a0f
+		summarizeBy: none
+		sourceColumn: customer_id
+
+	column product_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 516a235d-fa47-4cce-a6d4-421c427680cf
+		summarizeBy: none
+		sourceColumn: product_id
+
+	column geography_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 52bccbe2-8aeb-4b91-9320-812462859d8a
+		summarizeBy: none
+		sourceColumn: geography_id
+
+	column order_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f1e785a2-67ea-415e-86bc-6d5911978b50
+		summarizeBy: none
+		sourceColumn: order_date_key
+
+	column shipping_date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 31561fea-59d7-4bf8-b137-c2262d197e3a
+		summarizeBy: none
+		sourceColumn: shipping_date_key
+
+	column shipping_mode
+		dataType: string
+		lineageTag: ecfc8557-96bc-47e6-9660-c14c9ce50e22
+		summarizeBy: none
+		sourceColumn: shipping_mode
+
+	column delivery_status
+		dataType: string
+		lineageTag: 5f11a42e-e1b9-4a90-8e58-386686959a40
+		summarizeBy: none
+		sourceColumn: delivery_status
+
+	column order_item_quantity
+		dataType: int64
+		formatString: #,##0
+		lineageTag: 9b18bd1b-a8a4-42b3-b6a3-aed2e8fd7856
+		summarizeBy: sum
+		sourceColumn: order_item_quantity
+
+	column order_item_product_price
+		dataType: double
+		formatString: $#,##0.00
+		lineageTag: 0dc30202-bed6-4fb5-bdcd-8335e2550281
+		summarizeBy: average
+		sourceColumn: order_item_product_price
+
+	column order_item_discount
+		dataType: double
+		formatString: $#,##0.00
+		lineageTag: cff2554f-0f51-4ca1-ba23-17daf0c9ae81
+		summarizeBy: sum
+		sourceColumn: order_item_discount
+
+	column order_item_discount_rate
+		dataType: double
+		formatString: 0.00%
+		lineageTag: 69fd3fc6-9d69-429a-8e46-e92b31d25ee4
+		summarizeBy: average
+		sourceColumn: order_item_discount_rate
+
+	column gross_sales
+		dataType: double
+		formatString: $#,##0.00
+		lineageTag: f11cd4ce-4098-4753-b2fa-1d99cbcca6d1
+		summarizeBy: sum
+		sourceColumn: gross_sales
+
+	column net_sales
+		dataType: double
+		formatString: $#,##0.00
+		lineageTag: 7bd225c0-5392-40e5-ad45-e306d823a562
+		summarizeBy: sum
+		sourceColumn: net_sales
+
+	column profit
+		dataType: double
+		formatString: $#,##0.00
+		lineageTag: c7ecb57e-75e3-4af7-b8b4-d2527a46dea3
+		summarizeBy: sum
+		sourceColumn: profit
+
+	column profit_margin
+		dataType: double
+		formatString: 0.00%
+		lineageTag: ca28aa7c-8668-4ff3-9c4f-28c1ed2cb6ec
+		summarizeBy: average
+		sourceColumn: profit_margin
+
+	column shipping_days_real
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e18e653-fd97-4149-b508-7a1390021312
+		summarizeBy: average
+		sourceColumn: shipping_days_real
+
+	column shipping_days_scheduled
+		dataType: int64
+		formatString: 0
+		lineageTag: 8dada4a0-1ce6-42a6-bbeb-c889371c6aaa
+		summarizeBy: average
+		sourceColumn: shipping_days_scheduled
+
+	column delay_days
+		dataType: int64
+		formatString: 0
+		lineageTag: 346eaf27-c7bf-49e7-9b2e-beac9262e537
+		summarizeBy: average
+		sourceColumn: delay_days
+
+	column is_delayed
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ece1af1-baf6-4ca5-9873-62f546c4d75f
+		summarizeBy: sum
+		sourceColumn: is_delayed
+
+	column is_late_delivery
+		dataType: int64
+		formatString: 0
+		lineageTag: 93c0bb63-f705-4dbf-bbe1-afc044753848
+		summarizeBy: sum
+		sourceColumn: is_late_delivery
+
+	column is_eligible_shipment
+		dataType: int64
+		formatString: 0
+		lineageTag: ac9bc869-d4d4-4256-906b-b43f391f31ed
+		summarizeBy: sum
+		sourceColumn: is_eligible_shipment
+
+	column discount_tier
+		dataType: string
+		lineageTag: 490d03d7-01e8-46b9-816a-dd502f4f46f6
+		summarizeBy: none
+		sourceColumn: discount_tier
+
+	partition fact_order_items = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/fact_order_items.csv"),[Delimiter=",", Columns=24, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_item_id", Int64.Type}, {"order_id", Int64.Type}, {"customer_id", Int64.Type}, {"product_id", Int64.Type}, {"geography_id", Int64.Type}, {"order_date_key", Int64.Type}, {"shipping_date_key", Int64.Type}, {"shipping_mode", type text}, {"delivery_status", type text}, {"order_item_quantity", Int64.Type}, {"order_item_product_price", type number}, {"order_item_discount", type number}, {"order_item_discount_rate", type number}, {"gross_sales", type number}, {"net_sales", type number}, {"profit", type number}, {"profit_margin", type number}, {"shipping_days_real", Int64.Type}, {"shipping_days_scheduled", Int64.Type}, {"delay_days", Int64.Type}, {"is_delayed", Int64.Type}, {"is_late_delivery", Int64.Type}, {"is_eligible_shipment", Int64.Type}, {"discount_tier", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

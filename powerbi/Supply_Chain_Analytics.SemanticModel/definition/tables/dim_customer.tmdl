@@ -1,0 +1,75 @@
+table dim_customer
+	lineageTag: ed972dc1-45b7-45c8-a80a-d8f2731dd14e
+
+	column customer_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 46bef038-c48e-4f40-b59f-28871349c0c5
+		summarizeBy: none
+		sourceColumn: customer_id
+
+	column customer_fname
+		dataType: string
+		lineageTag: 80ec96b3-bd9b-4129-b722-072f40662e4b
+		summarizeBy: none
+		sourceColumn: customer_fname
+
+	column customer_lname
+		dataType: string
+		lineageTag: 171491ff-18ae-4c4f-943c-c86b893092fa
+		summarizeBy: none
+		sourceColumn: customer_lname
+
+	column customer_segment
+		dataType: string
+		lineageTag: 2bd6110d-c619-47ba-a4da-f73136f152d0
+		summarizeBy: none
+		sourceColumn: customer_segment
+
+	column customer_city
+		dataType: string
+		lineageTag: 2dbe4703-b766-4c45-a97f-be3af8268f5f
+		summarizeBy: none
+		sourceColumn: customer_city
+
+	column customer_state
+		dataType: string
+		lineageTag: c0d81f82-cf66-4721-8cb7-c5d30439fef9
+		summarizeBy: none
+		sourceColumn: customer_state
+
+	column customer_country
+		dataType: string
+		lineageTag: cd740cdb-225f-451f-a7fe-4fdfcd07b9e3
+		summarizeBy: none
+		sourceColumn: customer_country
+
+	column customer_street
+		dataType: string
+		lineageTag: 62e787da-919b-4414-a3df-024d46bb7a8b
+		summarizeBy: none
+		sourceColumn: customer_street
+
+	column customer_zipcode
+		dataType: string
+		lineageTag: c3c6c877-f5a9-4831-b042-3d3ecdc86a58
+		summarizeBy: none
+		sourceColumn: customer_zipcode
+
+	column customer_full_name
+		dataType: string
+		lineageTag: 527aa520-a430-4983-b119-4816fc779e0c
+		summarizeBy: none
+		sourceColumn: customer_full_name
+
+	partition dim_customer = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_customer.csv"),[Delimiter=",", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"customer_id", Int64.Type}, {"customer_fname", type text}, {"customer_lname", type text}, {"customer_segment", type text}, {"customer_city", type text}, {"customer_state", type text}, {"customer_country", type text}, {"customer_street", type text}, {"customer_zipcode", type text}, {"customer_full_name", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

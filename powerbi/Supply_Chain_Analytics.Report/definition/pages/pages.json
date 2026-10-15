@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
+  "pageOrder": [
+    "page_executive",
+    "page_shipping",
+    "page_profitability",
+    "page_inventory",
+    "page_deepdive"
+  ],
+  "activePageName": "page_executive"
+}

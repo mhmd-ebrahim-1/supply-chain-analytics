@@ -1,0 +1,160 @@
+table _Measures
+	lineageTag: 6672a7da-4f8a-4a2f-9d87-ba91919f14bc
+
+	measure 'Total Gross Sales' =
+			SUM ( fact_order_items[gross_sales] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: 08019555-5588-4553-bc35-99157dbf9386
+
+	measure 'Total Net Sales' =
+			SUM ( fact_order_items[net_sales] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: f2e08355-eb9c-4a72-8401-deebf8f42a2a
+
+	measure 'Total Profit' =
+			SUM ( fact_order_items[profit] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: dfe1f961-7a7e-4289-ba44-cdccf081410b
+
+	measure 'Profit Margin %' =
+			DIVIDE ( [Total Profit], [Total Net Sales], BLANK() )
+		formatString: 0.00%
+		displayFolder: 1. Financial KPIs
+		lineageTag: 785c2983-1563-432b-8659-8aa0d3b7a518
+
+	measure 'Total Discount Amount' =
+			SUM ( fact_order_items[order_item_discount] )
+		formatString: $#,##0.00
+		displayFolder: 1. Financial KPIs
+		lineageTag: 4b5df783-b055-43ad-80df-6c026952d4c3
+
+	measure 'Average Discount Rate %' =
+			AVERAGE ( fact_order_items[order_item_discount_rate] )
+		formatString: 0.00%
+		displayFolder: 1. Financial KPIs
+		lineageTag: 12bc0e0d-fd07-4880-8801-b17f5d69d851
+
+	measure 'Total Orders' =
+			DISTINCTCOUNT ( fact_order_items[order_id] )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: fa79a027-507f-471d-9077-91a1cc12414a
+
+	measure 'Total Order Items' =
+			COUNTROWS ( fact_order_items )
+		formatString: #,##0
+		displayFolder: 2. Volume KPIs
+		lineageTag: 19e2d9ab-34a0-47dd-b7d3-cc97f93e8baf
+
+	measure 'Average Order Value' =
+			DIVIDE ( [Total Net Sales], [Total Orders], BLANK() )
+		formatString: $#,##0.00
+		displayFolder: 2. Volume KPIs
+		lineageTag: 2636c1a5-0918-47e6-bcfb-f659541107e2
+
+	measure 'Items Per Order' =
+			DIVIDE ( [Total Order Items], [Total Orders], BLANK() )
+		formatString: 0.00
+		displayFolder: 2. Volume KPIs
+		lineageTag: 38442c59-29ae-4824-a8bb-947f635ca300
+
+	measure 'Total Eligible Shipments' =
+			CALCULATE ( COUNTROWS ( fact_order_items ), fact_order_items[is_eligible_shipment] = 1 )
+		formatString: #,##0
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 76ba38e4-71c8-49fe-9ffc-d7d074efdc42
+
+	measure 'Late Delivery Items Count' =
+			CALCULATE ( COUNTROWS ( fact_order_items ), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1 )
+		formatString: #,##0
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 38d1c73c-e39a-46bd-a045-ae39a8e6b743
+
+	measure 'Late Delivery Rate %' =
+			DIVIDE ( [Late Delivery Items Count], [Total Eligible Shipments], BLANK() )
+		formatString: 0.00%
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 10f8a8f5-7afd-4638-a6e1-98a6f214baa0
+
+	measure 'On-Time Delivery Rate %' =
+			1 - [Late Delivery Rate %]
+		formatString: 0.00%
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 11085197-9d94-4b74-9763-633533f8eb0b
+
+	measure 'Late Orders Count' =
+			CALCULATE ( DISTINCTCOUNT ( fact_order_items[order_id] ), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1 )
+		formatString: #,##0
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 05b36090-f4f0-4c09-b1cf-f0a53632ceab
+
+	measure 'Late Order Rate %' =
+			DIVIDE ( [Late Orders Count], [Total Orders], BLANK() )
+		formatString: 0.00%
+		displayFolder: 3. Delivery KPIs
+		lineageTag: ad7631fa-eb4c-4b59-9360-8f6e0ad6c36f
+
+	measure 'Average Actual Shipping Days' =
+			AVERAGE ( fact_order_items[shipping_days_real] )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: b899f309-e159-46e9-8f98-93d5de4a98b8
+
+	measure 'Average Scheduled Shipping Days' =
+			AVERAGE ( fact_order_items[shipping_days_scheduled] )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 74082f18-1933-4f72-97ea-1fe0724fd542
+
+	measure 'Average Delay Days (Late Only)' =
+			CALCULATE ( AVERAGE ( fact_order_items[delay_days] ), fact_order_items[is_late_delivery] = 1, fact_order_items[is_eligible_shipment] = 1 )
+		formatString: 0.00
+		displayFolder: 3. Delivery KPIs
+		lineageTag: 77e73575-6b60-4d50-9f9e-459e77106725
+
+	measure 'Sales Previous Month' =
+			CALCULATE ( [Total Net Sales], PREVIOUSMONTH ( dim_date[full_date] ) )
+		formatString: $#,##0.00
+		displayFolder: 4. Time Intelligence
+		lineageTag: 00528c74-7956-45a1-90c0-23363a837fa5
+
+	measure 'MoM Net Sales Growth %' =
+			VAR PrevSales = [Sales Previous Month]
+			RETURN DIVIDE ( [Total Net Sales] - PrevSales, PrevSales, BLANK() )
+		formatString: 0.00%
+		displayFolder: 4. Time Intelligence
+		lineageTag: 7c887817-287f-4d8e-9896-33b185009921
+
+	measure 'Profit Previous Month' =
+			CALCULATE ( [Total Profit], PREVIOUSMONTH ( dim_date[full_date] ) )
+		formatString: $#,##0.00
+		displayFolder: 4. Time Intelligence
+		lineageTag: 62deed2d-7439-420b-9d84-712eaf2a84f2
+
+	measure 'MoM Profit Growth %' =
+			VAR PrevProfit = [Profit Previous Month]
+			RETURN DIVIDE ( [Total Profit] - PrevProfit, PrevProfit, BLANK() )
+		formatString: 0.00%
+		displayFolder: 4. Time Intelligence
+		lineageTag: d1f96bfb-5508-428d-918c-add10d66058f
+
+	column MeasuresTablePlaceholder
+		dataType: int64
+		hidden
+		lineageTag: f186aeac-39dc-459b-ae7d-59105f7e2429
+		summarizeBy: none
+		sourceColumn: MeasuresTablePlaceholder
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WMlSKjQUA", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [MeasuresTablePlaceholder = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{"MeasuresTablePlaceholder", Int64.Type})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

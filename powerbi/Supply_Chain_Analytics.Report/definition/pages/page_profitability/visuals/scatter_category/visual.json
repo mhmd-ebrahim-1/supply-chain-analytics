@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "scatter_category",
+  "position": {
+    "x": 20,
+    "y": 160,
+    "z": 4,
+    "height": 260,
+    "width": 620,
+    "tabOrder": 4
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Details": {
+          "projections": []
+        },
+        "X": {
+          "projections": []
+        },
+        "Y": {
+          "projections": []
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Category Sales vs Profitability (Margin Clusters)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

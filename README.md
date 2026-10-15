@@ -188,6 +188,12 @@ supply-chain-analytics/
 ├── reports/
 │   ├── column_stats.json          # Machine-readable column metadata
 │   └── figures/                   # High-resolution publication charts
+├── powerbi/
+│   ├── Supply_Chain_Analytics.pbip # Power BI Project (double-click to open in Desktop)
+│   ├── Supply_Chain_Analytics.Report/ # PBIR git-friendly report definition (5 pages, 35 visuals)
+│   │   └── definition/            # Visual configs, pages.json, report.json
+│   └── Supply_Chain_Analytics.SemanticModel/ # TMDL git-friendly semantic model (Star Schema)
+│       └── definition/            # model.tmdl, relationships.tmdl, tables/
 ├── sql/
 │   ├── 01_data_quality.sql        # Grain reconciliation & integrity queries
 │   ├── 02_delivery_performance.sql # SLA and carrier transit queries
@@ -202,7 +208,9 @@ supply-chain-analytics/
 │   ├── feature_engineering.py     # Star schema extractor
 │   ├── analysis.py                # EDA and visualization generator
 │   ├── run_sql_analytics.py       # Automated SQL execution runner (DuckDB)
-│   └── advanced_analytics.py      # ABC, Pareto, ML risk & demand forecasting
+│   ├── advanced_analytics.py      # ABC, Pareto, ML risk & demand forecasting
+│   ├── generate_tmdl_model.py     # Code-first Power BI TMDL semantic model builder
+│   └── build_pbir_visuals.py      # Automated PBIR multi-page visual builder via pbi-cli
 ├── tests/
 │   ├── test_data_quality.py       # Domain and null value unit tests
 │   ├── test_metrics.py            # KPI calculation logic tests
@@ -217,7 +225,7 @@ supply-chain-analytics/
 
 ### Step 1: Clone Repository & Install Dependencies
 ```bash
-git clone https://github.com/your-username/supply-chain-analytics.git
+git clone https://github.com/mhmd-ebrahim-1/supply-chain-analytics.git
 cd supply-chain-analytics
 pip install -r requirements.txt
 ```
@@ -245,11 +253,22 @@ python src/advanced_analytics.py
 ```bash
 pytest tests/ -v
 ```
-
 All 14 tests will pass in under 12 seconds.
+
+### Step 6: Launch Power BI Dashboard (PBIP / PBIR)
+Double-click:
+`powerbi/Supply_Chain_Analytics.pbip`
+
+This launches Power BI Desktop connected to the TMDL semantic model and renders the 5 interactive pages:
+1. **Executive Overview:** High-level KPIs, monthly revenue/margin trajectory, category revenue breakdown, market revenue, and delivery health.
+2. **Shipping & Delivery Performance:** SLA compliance, shipping mode latency breakdown, overdue transit histogram, and regional matrix.
+3. **Product & Profitability Analysis:** Revenue vs profit margins, discount bracket erosion analysis, catalog product detail table.
+4. **Inventory & Replenishment Architecture:** Demand item volume, replenishment order counts, ABC revenue stratification breakdown.
+5. **Operational Deep Dive:** Multi-attribute interactive slicers (Market, Shipping Mode, Delivery Status, Segment) and comprehensive transaction audit grid.
 
 ---
 
 ## 11. Author & Contact
 - **Analyst:** Mohamed Ebrahim
-- **Specialization:**  Data Analyst | BI Developer 
+- **Specialization:** Senior Data Analyst | BI Developer | Supply Chain & Financial Analytics
+

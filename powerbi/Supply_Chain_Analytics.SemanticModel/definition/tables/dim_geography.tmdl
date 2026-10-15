@@ -1,0 +1,51 @@
+table dim_geography
+	lineageTag: 343aac35-5f86-4594-8e96-48962401cb4d
+
+	column geography_id
+		dataType: int64
+		formatString: 0
+		lineageTag: a32cc128-08ea-4270-ae86-0da62feedae4
+		summarizeBy: none
+		sourceColumn: geography_id
+
+	column order_region
+		dataType: string
+		lineageTag: 96dda0f6-8ac8-4f56-be78-866cf85d2213
+		summarizeBy: none
+		sourceColumn: order_region
+
+	column order_country
+		dataType: string
+		lineageTag: 97ef064a-0bb6-4dbb-9527-bb696526a6a6
+		summarizeBy: none
+		sourceColumn: order_country
+
+	column order_state
+		dataType: string
+		lineageTag: 45989638-a990-4bf0-a321-4d5ccf4e3e47
+		summarizeBy: none
+		sourceColumn: order_state
+
+	column order_city
+		dataType: string
+		lineageTag: eaf6e108-8c59-4e68-bba6-2de83c6c7987
+		summarizeBy: none
+		sourceColumn: order_city
+
+	column market
+		dataType: string
+		lineageTag: 952ffde7-36de-442f-9fa9-bf4bc128ee5e
+		summarizeBy: none
+		sourceColumn: market
+
+	partition dim_geography = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_geography.csv"),[Delimiter=",", Columns=6, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_region", type text}, {"order_country", type text}, {"order_state", type text}, {"order_city", type text}, {"market", type text}, {"geography_id", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

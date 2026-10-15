@@ -1,0 +1,45 @@
+table dim_order
+	lineageTag: e73d9aaf-ed76-4800-99fe-86adb94f36c7
+
+	column order_id
+		dataType: int64
+		formatString: 0
+		lineageTag: dd997088-b273-4064-8403-3e08e4dc1cf1
+		summarizeBy: none
+		sourceColumn: order_id
+
+	column payment_type
+		dataType: string
+		lineageTag: 15e1c59a-189e-45c1-9bb9-a9e0810a9937
+		summarizeBy: none
+		sourceColumn: payment_type
+
+	column order_status
+		dataType: string
+		lineageTag: 6a018e6f-66b4-4a3b-a721-afac5407b4ca
+		summarizeBy: none
+		sourceColumn: order_status
+
+	column market
+		dataType: string
+		lineageTag: edf962d1-ff07-4dd9-982b-d6e6a0df570d
+		summarizeBy: none
+		sourceColumn: market
+
+	column order_region
+		dataType: string
+		lineageTag: eee40d13-97b0-42e0-a05c-6e2d25891858
+		summarizeBy: none
+		sourceColumn: order_region
+
+	partition dim_order = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_order.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", Int64.Type}, {"payment_type", type text}, {"order_status", type text}, {"market", type text}, {"order_region", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
