@@ -1,0 +1,200 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "table_p3_details",
+  "position": {
+    "x": 748,
+    "y": 461,
+    "z": 13,
+    "height": 243,
+    "width": 516,
+    "tabOrder": 13
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Quantity"
+                }
+              },
+              "queryRef": "_Measures.Total Quantity",
+              "nativeQueryRef": "Total Quantity"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Sales"
+                }
+              },
+              "queryRef": "_Measures.Total Sales",
+              "nativeQueryRef": "Total Sales"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Total Profit"
+                }
+              },
+              "queryRef": "_Measures.Total Profit",
+              "nativeQueryRef": "Total Profit"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Profit Margin %"
+                }
+              },
+              "queryRef": "_Measures.Profit Margin %",
+              "nativeQueryRef": "Profit Margin %"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "product_name"
+                }
+              },
+              "queryRef": "dim_product.product_name",
+              "nativeQueryRef": "product_name",
+              "active": true
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "department_name"
+                }
+              },
+              "queryRef": "dim_product.department_name",
+              "nativeQueryRef": "department_name",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Product Performance Details'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

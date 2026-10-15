@@ -20,13 +20,15 @@ def star_schema():
     dim_geo = pd.read_csv(os.path.join(PROCESSED_DIR, "dim_geography.csv"))
     dim_order = pd.read_csv(os.path.join(PROCESSED_DIR, "dim_order.csv"))
     dim_date = pd.read_csv(os.path.join(PROCESSED_DIR, "dim_date.csv"))
+    dim_shipping = pd.read_csv(os.path.join(PROCESSED_DIR, "dim_shipping.csv"))
     return {
         'fact': fact,
         'dim_product': dim_product,
         'dim_customer': dim_customer,
         'dim_geo': dim_geo,
         'dim_order': dim_order,
-        'dim_date': dim_date
+        'dim_date': dim_date,
+        'dim_shipping': dim_shipping
     }
 
 def test_distinct_order_grain_ratio(star_schema):
@@ -52,14 +54,18 @@ def test_foreign_key_referential_integrity(star_schema):
     assert len(invalid_custs) == 0, f"Found orphaned customer foreign keys: {invalid_custs}"
 
     # 3. Geography FK
-    invalid_geos = set(fact['geography_id']) - set(star_schema['dim_geo']['geography_id'])
+    invalid_geos = set(fact['geo_id']) - set(star_schema['dim_geo']['geo_id'])
     assert len(invalid_geos) == 0, f"Found orphaned geography foreign keys: {invalid_geos}"
 
-    # 4. Order FK
+    # 4. Shipping FK
+    invalid_ships = set(fact['shipping_id']) - set(star_schema['dim_shipping']['shipping_id'])
+    assert len(invalid_ships) == 0, f"Found orphaned shipping foreign keys: {invalid_ships}"
+
+    # 5. Order FK
     invalid_orders = set(fact['order_id']) - set(star_schema['dim_order']['order_id'])
     assert len(invalid_orders) == 0, f"Found orphaned order foreign keys: {invalid_orders}"
 
-    # 5. Order Date FK
+    # 6. Order Date FK
     invalid_dates = set(fact['order_date_key']) - set(star_schema['dim_date']['date_key'])
     assert len(invalid_dates) == 0, f"Found orphaned date foreign keys: {invalid_dates}"
 
@@ -67,9 +73,9 @@ def test_python_to_sql_total_reconciliation(star_schema):
     """Ensure benchmark totals match exact verified SQL results."""
     fact = star_schema['fact']
     
-    total_sales = fact['net_sales'].sum().round(2)
-    total_profit = fact['profit'].sum().round(2)
-    late_count = fact[fact['is_eligible_shipment'] == 1]['is_late_delivery'].sum()
+    total_sales = fact['sales'].sum().round(2)
+    total_profit = fact['benefit_per_order'].sum().round(2)
+    late_count = fact['late_delivery_risk'].sum()
 
     assert np.isclose(total_sales, 33054402.04, atol=0.05), f"Sales mismatch: {total_sales}"
     assert np.isclose(total_profit, 3966907.39, atol=0.05), f"Profit mismatch: {total_profit}"

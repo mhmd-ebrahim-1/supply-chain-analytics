@@ -1,0 +1,228 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "scatter_p3_discount",
+  "position": {
+    "x": 216,
+    "y": 461,
+    "z": 12,
+    "height": 243,
+    "width": 516,
+    "tabOrder": 12
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Details": {
+          "projections": []
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Discount Rate %"
+                }
+              },
+              "queryRef": "_Measures.Avg Discount Rate %",
+              "nativeQueryRef": "Avg Discount Rate %"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Profit Margin %"
+                }
+              },
+              "queryRef": "_Measures.Profit Margin %",
+              "nativeQueryRef": "Profit Margin %"
+            }
+          ]
+        },
+        "category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "category_name"
+                }
+              },
+              "queryRef": "dim_product.category_name",
+              "nativeQueryRef": "category_name",
+              "active": true
+            }
+          ]
+        },
+        "Legend": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_product"
+                    }
+                  },
+                  "Property": "department_name"
+                }
+              },
+              "queryRef": "dim_product.department_name",
+              "nativeQueryRef": "department_name",
+              "active": true
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true,
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Discount Rate vs. Profit Margin by Category'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "dataLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

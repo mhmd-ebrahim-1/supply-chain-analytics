@@ -70,28 +70,31 @@ erDiagram
     DIM_DATE ||--o{ FACT_ORDER_ITEMS : "order_date_key (1:N)"
     DIM_PRODUCT ||--o{ FACT_ORDER_ITEMS : "product_id (1:N)"
     DIM_CUSTOMER ||--o{ FACT_ORDER_ITEMS : "customer_id (1:N)"
-    DIM_GEOGRAPHY ||--o{ FACT_ORDER_ITEMS : "geography_id (1:N)"
+    DIM_GEOGRAPHY ||--o{ FACT_ORDER_ITEMS : "geo_id (1:N)"
     DIM_ORDER ||--o{ FACT_ORDER_ITEMS : "order_id (1:N)"
+    DIM_SHIPPING ||--o{ FACT_ORDER_ITEMS : "shipping_id (1:N)"
 
     FACT_ORDER_ITEMS {
         int order_item_id PK
         int order_id FK
         int customer_id FK
         int product_id FK
-        int geography_id FK
+        int geo_id FK
+        int shipping_id FK
         int order_date_key FK
         int shipping_date_key FK
-        varchar shipping_mode
-        varchar delivery_status
         int order_item_quantity
-        decimal net_sales
-        decimal profit
-        int shipping_days_real
-        int shipping_days_scheduled
-        int delay_days
-        int is_late_delivery
-        int is_eligible_shipment
-        varchar discount_tier
+        decimal sales
+        decimal order_item_discount
+        decimal order_item_discount_rate
+        decimal order_item_product_price
+        decimal order_item_profit_ratio
+        decimal order_profit_per_order
+        decimal benefit_per_order
+        decimal sales_per_customer
+        int days_for_shipping_real
+        int days_for_shipment_scheduled
+        int late_delivery_risk
     }
 ```
 
@@ -259,11 +262,11 @@ All 14 tests will pass in under 12 seconds.
 Double-click:
 `powerbi/Supply_Chain_Analytics.pbip`
 
-This launches Power BI Desktop connected to the TMDL semantic model and renders the 4-page Modern Executive UI/UX Dashboard (`1280x720`, `#F1F5F9` canvas, Deep Slate Navy sidebar `#0F172A`, white cards `#FFFFFF` with soft borders `#E2E8F0`):
-1. **Page 1: Executive Overview (الملخص التنفيذي):** Left navigation sidebar, top slicers (Fiscal Year, Market, Segment, Order Status), 4 core KPI cards (Total Sales, Total Profit, Total Orders, AOV), Monthly Sales & Profit combo chart, Sales by Customer Segment donut chart, Sales by Market bar chart, and Orders by Payment Method bar chart.
-2. **Page 2: Shipping & Logistics - OTIF (أداء الشحن والعمليات اللوجستية):** Left navigation sidebar, top slicers (Shipping Mode, Market), 4 delivery benchmark cards (On-Time Delivery % OTIF, Late Delivery Risk %, Avg Real Shipping Days, Avg Shipping Delay Days), Late Delivery Rate % by shipping mode bar chart, Delivery Status Breakdown donut chart, Late Delivery Rate Trend Over Time line chart, and Regional Logistics SLA Compliance matrix.
-3. **Page 3: Product & Category Performance (تحليل المنتجات والأقسام):** Left navigation sidebar, top slicers (Department, Discount Tier), 4 product metric cards (Total Products Sold, Total Units Sold, Total Discount Given, Avg Product Price), Top Categories by Sales bar chart, Sales Share by Department treemap, Profit Margin % by Discount Bracket bar chart, and Product Financial Scorecard audit table.
-4. **Page 4: Customer & Geo Intelligence (التحليل الجغرافي والعملاء):** Left navigation sidebar, top slicers (Market, Customer Segment), 4 customer KPI cards (Active Customers, Sales per Customer, Countries Reached, Suspected Fraud Orders), Geographic Sales Distribution by Region column chart, Revenue by Customer Segment bar chart, Top Customers by Revenue & Profit audit table, and Order Lifecycle & Fraud Risk Analysis bar chart.
+This launches Power BI Desktop connected to the TMDL semantic model and renders the 4-page Modern Executive UI/UX Dashboard (`1280x720`, `#F1F5F9` canvas, Deep Slate Navy sidebar `#0F172A`, white cards `#FFFFFF` with soft borders `#E2E8F0` and drop shadows):
+1. **Page 1: Executive Overview (الملخص التنفيذي):** Left navigation sidebar, top dropdown slicers (Fiscal Year, Market, Customer Segment, Order Status), 4 core KPI cards (Total Sales, Total Profit, Total Orders, AOV), Monthly Sales & Profit Trend (Line & Clustered Column combo chart), Sales Share by Customer Segment (Donut chart), Net Sales & Profit by Market (Clustered Bar chart), and Orders by Payment Method (Clustered Bar chart).
+2. **Page 2: Shipping & Logistics - OTIF (أداء الشحن والعمليات اللوجستية):** Left navigation sidebar, top dropdown slicers (Fiscal Year, Shipping Mode, Delivery Status, Market), 4 delivery benchmark cards (On-Time Delivery Rate %, Late Delivery Rate %, Avg Real Shipping Days, Shipping Delay Variance), Scheduled vs. Real Shipping Days by Mode (Clustered Column chart), Orders by Delivery Status & Shipping Mode (100% Stacked Bar chart), Late Delivery Risk % Trend Over Time (Area chart), and Delivery Performance by Region (Matrix / Table).
+3. **Page 3: Product & Category Performance (تحليل المنتجات والأقسام):** Left navigation sidebar, top dropdown slicers (Fiscal Year, Department, Category, Market), 4 product metric cards (Active Products, Total Quantity, Profit Margin %, Total Discount), Top Product Categories by Sales (Clustered Bar chart), Sales Share by Department (Treemap), Discount Rate vs. Profit Margin by Category (Scatter chart), and Product Performance Details (Table).
+4. **Page 4: Customer & Geo Intelligence (التحليل الجغرافي والعملاء):** Left navigation sidebar, top dropdown slicers (Fiscal Year, Market, Order Region, Customer Segment), 4 customer KPI cards (Active Customers, Sales per Customer, Countries Reached, Suspected Fraud Orders), Global Sales by Order Region (Clustered Bar chart), Orders by Order Status (Clustered Bar chart), Top Countries by Sales & Profit (Line & Clustered Column combo chart), and Customer Segment & Country Breakdown (Matrix).
 
 ---
 

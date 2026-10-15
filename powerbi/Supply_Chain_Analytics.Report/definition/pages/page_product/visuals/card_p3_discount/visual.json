@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "card_p3_discount",
   "position": {
-    "x": 748,
-    "y": 88,
-    "z": 5,
+    "x": 1014,
+    "y": 84,
+    "z": 9,
     "height": 105,
     "width": 250,
-    "tabOrder": 5
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Total Discount Given"
+                  "Property": "Total Discount"
                 }
               },
-              "queryRef": "_Measures.Total Discount Given",
-              "nativeQueryRef": "Total Discount Given"
+              "queryRef": "_Measures.Total Discount",
+              "nativeQueryRef": "Total Discount"
             }
           ]
         }
@@ -41,7 +41,82 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Total Discount Given'"
+                  "Value": "'Total Discount'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

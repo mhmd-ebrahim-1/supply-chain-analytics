@@ -1,65 +1,59 @@
 table dim_product
-	lineageTag: a6750dfa-8903-4b0d-9f93-959c0bf1b7b4
+	lineageTag: 60faa843-e17b-4e16-b4a5-731820062973
 
 	column product_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 2f582562-10ae-447d-8d16-6c6bbbfb6a82
+		lineageTag: 9450aa63-751e-4d63-966a-fe1880a122d7
 		summarizeBy: none
 		sourceColumn: product_id
 
 	column product_name
 		dataType: string
-		lineageTag: e6e4aabb-5dd5-44c7-b41b-5523dac50358
+		lineageTag: dad0f516-7175-48ac-924a-93f8ee3d6c2e
 		summarizeBy: none
 		sourceColumn: product_name
 
 	column product_price
 		dataType: double
 		formatString: $#,##0.00
-		lineageTag: 7d45bf45-6d39-497a-ab1d-55de5e1df442
+		lineageTag: 9fdeedd1-f954-4a64-9a3d-6ed3c4231180
 		summarizeBy: average
 		sourceColumn: product_price
 
 	column category_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 1de462ce-c158-4785-8b42-f924f7ea7302
+		lineageTag: 6b587258-401d-41ce-9364-e754f5c6ac9a
 		summarizeBy: none
 		sourceColumn: category_id
 
 	column category_name
 		dataType: string
-		lineageTag: 70fc4e69-bdf3-4f5c-b555-6ad1b05c1852
+		lineageTag: 32d622e1-c18a-402c-8d68-2e61501e2772
 		summarizeBy: none
 		sourceColumn: category_name
 
 	column department_id
 		dataType: int64
 		formatString: 0
-		lineageTag: 38c48c02-a964-45a5-97e0-72a7f7418881
+		lineageTag: a6faa4ea-0113-4b06-826e-632e51bbd939
 		summarizeBy: none
 		sourceColumn: department_id
 
 	column department_name
 		dataType: string
-		lineageTag: b5a8c22d-96cd-4a4a-b355-e78a641ca4e1
+		lineageTag: 8c19285a-16d3-4c9b-8e55-d5282b7b03c3
 		summarizeBy: none
 		sourceColumn: department_name
-
-	column abc_revenue_class
-		dataType: string
-		lineageTag: 2fe17a84-65ae-4e9f-a10a-1e81fcf5fd6f
-		summarizeBy: none
-		sourceColumn: abc_revenue_class
 
 	partition dim_product = m
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_product.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_product.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"product_id", Int64.Type}, {"product_name", type text}, {"product_price", type number}, {"category_id", Int64.Type}, {"category_name", type text}, {"department_id", Int64.Type}, {"department_name", type text}, {"abc_revenue_class", type text}})
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"product_id", Int64.Type}, {"product_name", type text}, {"product_price", type number}, {"category_id", Int64.Type}, {"category_name", type text}, {"department_id", Int64.Type}, {"department_name", type text}})
 				in
 				    #"Changed Type"
 

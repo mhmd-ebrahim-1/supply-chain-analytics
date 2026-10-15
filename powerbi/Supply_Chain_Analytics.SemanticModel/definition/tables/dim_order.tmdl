@@ -1,44 +1,32 @@
 table dim_order
-	lineageTag: e73d9aaf-ed76-4800-99fe-86adb94f36c7
+	lineageTag: 2334d14c-50a1-4767-b011-54b4f653eb5e
 
 	column order_id
 		dataType: int64
 		formatString: 0
-		lineageTag: dd997088-b273-4064-8403-3e08e4dc1cf1
+		lineageTag: 0695dc21-9bab-4187-a3fd-ddd4da4a1657
 		summarizeBy: none
 		sourceColumn: order_id
 
-	column payment_type
-		dataType: string
-		lineageTag: 15e1c59a-189e-45c1-9bb9-a9e0810a9937
-		summarizeBy: none
-		sourceColumn: payment_type
-
 	column order_status
 		dataType: string
-		lineageTag: 6a018e6f-66b4-4a3b-a721-afac5407b4ca
+		lineageTag: 8eb1c1d0-7dc3-4057-a032-59fb3996a7d5
 		summarizeBy: none
 		sourceColumn: order_status
 
-	column market
+	column payment_type
 		dataType: string
-		lineageTag: edf962d1-ff07-4dd9-982b-d6e6a0df570d
+		lineageTag: c5827303-60c2-4d2b-beb8-adc4f4f987be
 		summarizeBy: none
-		sourceColumn: market
-
-	column order_region
-		dataType: string
-		lineageTag: eee40d13-97b0-42e0-a05c-6e2d25891858
-		summarizeBy: none
-		sourceColumn: order_region
+		sourceColumn: payment_type
 
 	partition dim_order = m
 		mode: import
 		source =
 				let
-				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_order.csv"),[Delimiter=",", Columns=5, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_order.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
 				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
-				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", Int64.Type}, {"payment_type", type text}, {"order_status", type text}, {"market", type text}, {"order_region", type text}})
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", Int64.Type}, {"order_status", type text}, {"payment_type", type text}})
 				in
 				    #"Changed Type"
 

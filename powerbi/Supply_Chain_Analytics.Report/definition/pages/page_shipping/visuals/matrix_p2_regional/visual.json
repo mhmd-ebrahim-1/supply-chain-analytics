@@ -3,11 +3,11 @@
   "name": "matrix_p2_regional",
   "position": {
     "x": 748,
-    "y": 465,
-    "z": 10,
-    "height": 239,
+    "y": 461,
+    "z": 13,
+    "height": 243,
     "width": 516,
-    "tabOrder": 10
+    "tabOrder": 13
   },
   "visual": {
     "visualType": "pivotTable",
@@ -42,30 +42,53 @@
                       "Entity": "_Measures"
                     }
                   },
+                  "Property": "Total Orders"
+                }
+              },
+              "queryRef": "_Measures.Total Orders",
+              "nativeQueryRef": "Total Orders"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Scheduled Shipping Days"
+                }
+              },
+              "queryRef": "_Measures.Avg Scheduled Shipping Days",
+              "nativeQueryRef": "Avg Scheduled Shipping Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Avg Real Shipping Days"
+                }
+              },
+              "queryRef": "_Measures.Avg Real Shipping Days",
+              "nativeQueryRef": "Avg Real Shipping Days"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
                   "Property": "Late Delivery Rate %"
                 }
               },
               "queryRef": "_Measures.Late Delivery Rate %",
               "nativeQueryRef": "Late Delivery Rate %"
-            }
-          ]
-        },
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "fact_order_items"
-                    }
-                  },
-                  "Property": "shipping_mode"
-                }
-              },
-              "queryRef": "fact_order_items.shipping_mode",
-              "nativeQueryRef": "shipping_mode",
-              "active": true
             }
           ]
         }
@@ -79,7 +102,82 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Regional Logistics SLA Compliance Matrix'"
+                  "Value": "'Delivery Performance by Region'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

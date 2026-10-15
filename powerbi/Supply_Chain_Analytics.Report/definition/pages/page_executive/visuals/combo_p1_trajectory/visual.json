@@ -3,11 +3,11 @@
   "name": "combo_p1_trajectory",
   "position": {
     "x": 216,
-    "y": 209,
-    "z": 9,
+    "y": 205,
+    "z": 10,
     "height": 240,
     "width": 680,
-    "tabOrder": 9
+    "tabOrder": 10
   },
   "visual": {
     "visualType": "lineStackedColumnComboChart",
@@ -23,11 +23,11 @@
                       "Entity": "dim_date"
                     }
                   },
-                  "Property": "year_month"
+                  "Property": "full_date"
                 }
               },
-              "queryRef": "dim_date.year_month",
-              "nativeQueryRef": "year_month",
+              "queryRef": "dim_date.full_date",
+              "nativeQueryRef": "full_date",
               "active": true
             }
           ]
@@ -79,6 +79,122 @@
               "expr": {
                 "Literal": {
                   "Value": "'Monthly Sales & Profit Trend'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "dataLabels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "valueAxis": [
+        {
+          "properties": {
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

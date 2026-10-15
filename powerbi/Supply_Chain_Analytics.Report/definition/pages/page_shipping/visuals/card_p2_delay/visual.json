@@ -3,11 +3,11 @@
   "name": "card_p2_delay",
   "position": {
     "x": 1014,
-    "y": 88,
-    "z": 6,
+    "y": 84,
+    "z": 9,
     "height": 105,
     "width": 250,
-    "tabOrder": 6
+    "tabOrder": 9
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Avg Shipping Delay (Days)"
+                  "Property": "Shipping Delay Variance"
                 }
               },
-              "queryRef": "_Measures.Avg Shipping Delay (Days)",
-              "nativeQueryRef": "Avg Shipping Delay (Days)"
+              "queryRef": "_Measures.Shipping Delay Variance",
+              "nativeQueryRef": "Shipping Delay Variance"
             }
           ]
         }
@@ -41,7 +41,82 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Avg Shipping Delay (Days)'"
+                  "Value": "'Shipping Delay Variance'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

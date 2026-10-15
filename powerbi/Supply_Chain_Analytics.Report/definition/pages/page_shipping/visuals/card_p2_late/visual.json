@@ -3,11 +3,11 @@
   "name": "card_p2_late",
   "position": {
     "x": 482,
-    "y": 88,
-    "z": 4,
+    "y": 84,
+    "z": 7,
     "height": 105,
     "width": 250,
-    "tabOrder": 4
+    "tabOrder": 7
   },
   "visual": {
     "visualType": "card",
@@ -23,11 +23,11 @@
                       "Entity": "_Measures"
                     }
                   },
-                  "Property": "Late Delivery Risk %"
+                  "Property": "Late Delivery Rate %"
                 }
               },
-              "queryRef": "_Measures.Late Delivery Risk %",
-              "nativeQueryRef": "Late Delivery Risk %"
+              "queryRef": "_Measures.Late Delivery Rate %",
+              "nativeQueryRef": "Late Delivery Rate %"
             }
           ]
         }
@@ -41,7 +41,82 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Late Delivery Risk %'"
+                  "Value": "'Late Delivery Rate %'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#E2E8F0'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }

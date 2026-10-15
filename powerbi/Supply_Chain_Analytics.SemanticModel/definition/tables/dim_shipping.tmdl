@@ -1,0 +1,33 @@
+table dim_shipping
+	lineageTag: 7922b594-f55b-4b0c-8862-254fecd95f9d
+
+	column shipping_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 541dcf7f-2547-4590-b8af-0aca1f0cd245
+		summarizeBy: none
+		sourceColumn: shipping_id
+
+	column shipping_mode
+		dataType: string
+		lineageTag: 37820c43-45fe-481b-bd9c-8e4452f7d0c0
+		summarizeBy: none
+		sourceColumn: shipping_mode
+
+	column delivery_status
+		dataType: string
+		lineageTag: 0b510973-e013-43a0-898f-3030373dbb2a
+		summarizeBy: none
+		sourceColumn: delivery_status
+
+	partition dim_shipping = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:/Downloads/supply-chain-analytics/data/processed/dim_shipping.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"shipping_id", Int64.Type}, {"shipping_mode", type text}, {"delivery_status", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table

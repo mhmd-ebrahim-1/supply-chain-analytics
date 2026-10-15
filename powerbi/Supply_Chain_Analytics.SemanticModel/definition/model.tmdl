@@ -7,7 +7,7 @@ model Model
 		returnErrorValuesAsNull
 
 annotation __PBI_TimeIntelligenceEnabled = 0
-annotation PBI_QueryOrder = ["fact_order_items","dim_date","dim_product","dim_customer","dim_geography","dim_order"]
+annotation PBI_QueryOrder = ["fact_order_items","dim_date","dim_product","dim_customer","dim_geography","dim_order","dim_shipping"]
 annotation PBI_ProTooling = ["DevMode"]
 
 ref table fact_order_items
@@ -16,6 +16,7 @@ ref table dim_product
 ref table dim_customer
 ref table dim_geography
 ref table dim_order
+ref table dim_shipping
 ref table _Measures
 
 ref cultureInfo en-US

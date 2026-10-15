@@ -7,8 +7,12 @@ relationship rel_fact_customer
 	toColumn: dim_customer.customer_id
 
 relationship rel_fact_geography
-	fromColumn: fact_order_items.geography_id
-	toColumn: dim_geography.geography_id
+	fromColumn: fact_order_items.geo_id
+	toColumn: dim_geography.geo_id
+
+relationship rel_fact_shipping
+	fromColumn: fact_order_items.shipping_id
+	toColumn: dim_shipping.shipping_id
 
 relationship rel_fact_order
 	fromColumn: fact_order_items.order_id
