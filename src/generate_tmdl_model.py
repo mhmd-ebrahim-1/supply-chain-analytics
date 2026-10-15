@@ -260,7 +260,7 @@ def write_measures_table():
 
 \tcolumn MeasuresTablePlaceholder
 \t\tdataType: int64
-\t\thidden
+\t\tisHidden
 \t\tlineageTag: {u()}
 \t\tsummarizeBy: none
 \t\tsourceColumn: MeasuresTablePlaceholder

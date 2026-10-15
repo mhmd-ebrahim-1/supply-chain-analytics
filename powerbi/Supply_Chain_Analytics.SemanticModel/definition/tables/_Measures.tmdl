@@ -143,7 +143,7 @@ table _Measures
 
 	column MeasuresTablePlaceholder
 		dataType: int64
-		hidden
+		isHidden
 		lineageTag: f186aeac-39dc-459b-ae7d-59105f7e2429
 		summarizeBy: none
 		sourceColumn: MeasuresTablePlaceholder
