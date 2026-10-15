@@ -270,5 +270,5 @@ This launches Power BI Desktop connected to the TMDL semantic model and renders 
 
 ## 11. Author & Contact
 - **Analyst:** Mohamed Ebrahim
-- **Specialization:** Senior Data Analyst | BI Developer | Supply Chain & Financial Analytics
+- **Specialization:** Data Analyst | BI Developer 
 
